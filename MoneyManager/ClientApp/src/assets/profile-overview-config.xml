@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xml:base="https://www.cidrap.umn.edu/news/178636/rss" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xmlns:book="http://ogp.me/ns/book#" xmlns:profile="http://ogp.me/ns/profile#" xmlns:video="http://ogp.me/ns/video#" xmlns:product="http://ogp.me/ns/product#" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <channel>
+    <title>CIDRAP - COVID-19 News</title>
+    <link>https://www.cidrap.umn.edu/news/178636/rss</link>
+    <description></description>
+    <language>en</language>
+    <atom:link href="https://www.cidrap.umn.edu/news/178636/rss" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Masks off on US public transit as COVID-19 cases rise</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/masks-us-public-transit-covid-19-cases-rise</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/masks-us-public-transit-covid-19-cases-rise&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/man_taking_mask_off_on_plane.jpg?itok=Uz8mOp0F&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Man taking mask off on plane&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Stephanie Soucheray | News Reporter | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-19T00:00:00-05:00&quot;&gt;Apr 19, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;Also, new CDC data show that 9 of 10 young kids hospitalized with Omicron were not vaccinated.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Tue, 19 Apr 2022 20:25:15 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227916 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/masks-us-public-transit-covid-19-cases-rise#comments</comments>
+    </item>
+    <item>
+      <title>COVID-19 Scan for Apr 19, 2022</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/covid-19-scan-apr-19-2022</link>
+      <description>&lt;div class=&quot;field field-name-field-bullet-points field-type-text field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;COVID and maintenance drugs&lt;/div&gt;&lt;div class=&quot;field-item odd&quot;&gt;COVID-19 booster side effects&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Tue, 19 Apr 2022 18:18:18 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227896 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/covid-19-scan-apr-19-2022#comments</comments>
+    </item>
+    <item>
+      <title>Study suggests worse outcomes for awake COVID patients in prone position</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/study-suggests-worse-outcomes-awake-covid-patients-prone-position</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/study-suggests-worse-outcomes-awake-covid-patients-prone-position&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/woman_on_oxygen_in_prone_position.jpg?itok=FD8GG7eh&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Woman on oxygen in prone position&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Mary Van Beusekom | News Writer | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-19T00:00:00-05:00&quot;&gt;Apr 19, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;A commentary, however, cautions about applying the findings to all patient populations.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Tue, 19 Apr 2022 19:25:37 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227911 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/study-suggests-worse-outcomes-awake-covid-patients-prone-position#comments</comments>
+    </item>
+    <item>
+      <title>RDSP maps medicine supply to US to predict, prevent shortages (part 2 of 2)</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/rdsp-maps-medicine-supply-us-predict-prevent-shortages-part-2-2</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/rdsp-maps-medicine-supply-us-predict-prevent-shortages-part-2-2&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/child_in_hospital_bed-crop.jpg?itok=_9NlVYl_&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Child in hospital bed&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Mary Van Beusekom | News Writer | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-18T00:00:00-05:00&quot;&gt;Apr 18, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;&quot;When prescription drugs are not affordable or accessible for any reason, consumers can experience lost work days, disease progression and complications ... even premature death.&quot;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Mon, 18 Apr 2022 19:19:47 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227846 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/rdsp-maps-medicine-supply-us-predict-prevent-shortages-part-2-2#comments</comments>
+    </item>
+    <item>
+      <title>News Scan for Apr 18, 2022</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/news-scan-apr-18-2022</link>
+      <description>&lt;div class=&quot;field field-name-field-bullet-points field-type-text field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Expanded COVID vaccine intervals&lt;/div&gt;&lt;div class=&quot;field-item odd&quot;&gt;More COVID deaths on weekends&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Mon, 18 Apr 2022 18:42:51 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227856 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/news-scan-apr-18-2022#comments</comments>
+    </item>
+    <item>
+      <title>Global data reveal half may have long COVID 4 months on</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/global-data-reveal-half-may-have-long-covid-4-months</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/global-data-reveal-half-may-have-long-covid-4-months&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/young_woman_with_long_covid.jpg?itok=FMHgmaWX&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Young woman with long covid headache&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Mary Van Beusekom | News Writer | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-18T00:00:00-05:00&quot;&gt;Apr 18, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;Review of 31 studies finds fatigue, memory problems, and shortness of breath are most common.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Mon, 18 Apr 2022 21:08:47 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227866 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/global-data-reveal-half-may-have-long-covid-4-months#comments</comments>
+    </item>
+    <item>
+      <title>Judge nixes travel mask mandate as COVID-19 cases inch up</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/judge-nixes-travel-mask-mandate-covid-19-cases-inch</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/judge-nixes-travel-mask-mandate-covid-19-cases-inch&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/family_wearing_masks_on_plane.jpg?itok=PIE46R06&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Couple wearing masks on plane&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Lisa Schnirring | News Editor | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-18T00:00:00-05:00&quot;&gt;Apr 18, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;A federal judge in Florida strikes down the CDC mask mandate for airline and other public transport.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Mon, 18 Apr 2022 21:04:06 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227871 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/judge-nixes-travel-mask-mandate-covid-19-cases-inch#comments</comments>
+    </item>
+    <item>
+      <title>News Scan for Apr 15, 2022</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/news-scan-apr-15-2022</link>
+      <description>&lt;div class=&quot;field field-name-field-bullet-points field-type-text field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;COVID, upper airway infection in kids&lt;/div&gt;&lt;div class=&quot;field-item odd&quot;&gt;Avian flu detected in Idaho flocks&lt;/div&gt;&lt;div class=&quot;field-item even&quot;&gt;US flu continues slow rise&lt;/div&gt;&lt;div class=&quot;field-item odd&quot;&gt;Polio in Nigeria and Israel&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Fri, 15 Apr 2022 18:24:33 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227736 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/news-scan-apr-15-2022#comments</comments>
+    </item>
+    <item>
+      <title>FDA authorizes COVID breath test for emergency use</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/fda-authorizes-covid-breath-test-emergency-use</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/fda-authorizes-covid-breath-test-emergency-use&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/computer_programing_code.jpg?itok=akKsn259&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Computer programing code&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Lisa Schnirring | News Editor | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-15T00:00:00-05:00&quot;&gt;Apr 15, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;In China, officials say they will help key industries resume operations in Shanghai.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Fri, 15 Apr 2022 19:56:49 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227751 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/fda-authorizes-covid-breath-test-emergency-use#comments</comments>
+    </item>
+    <item>
+      <title>Psychiatric disorders may up risk for COVID-19 reinfection</title>
+      <link>https://www.cidrap.umn.edu/news-perspective/2022/04/psychiatric-disorders-may-risk-covid-19-reinfection</link>
+      <description>&lt;div class=&quot;field field-name-field-image-thumbnail field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/news-perspective/2022/04/psychiatric-disorders-may-risk-covid-19-reinfection&quot;&gt;&lt;img typeof=&quot;foaf:Image&quot; src=&quot;https://www.cidrap.umn.edu/sites/default/files/public/styles/thumbnail/public/images/news/depressed_elderly_woman.jpg?itok=PY0vYXk3&quot; width=&quot;200&quot; height=&quot;125&quot; alt=&quot;Depressed elderly woman&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-byline field-type-taxonomy-term-reference field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;!-- Author Start --&gt;Mary Van Beusekom | News Writer | CIDRAP News&lt;!-- Author End --&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-date field-type-datetime field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;span class=&quot;date-display-single&quot; property=&quot;dc:date&quot; datatype=&quot;xsd:dateTime&quot; content=&quot;2022-04-15T00:00:00-05:00&quot;&gt;Apr 15, 2022&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-field-teaser field-type-text-long field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;Certain psychiatric disorders may predispose fully vaccinated COVID-19 survivors to reinfection.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description>
+      <pubDate>Fri, 15 Apr 2022 20:27:48 +0000</pubDate>
+      <dc:creator>Jim Wappes</dc:creator>
+      <guid isPermaLink="false">227756 at https://www.cidrap.umn.edu</guid>
+      <comments>https://www.cidrap.umn.edu/news-perspective/2022/04/psychiatric-disorders-may-risk-covid-19-reinfection#comments</comments>
+    </item>
+  </channel>
+</rss>

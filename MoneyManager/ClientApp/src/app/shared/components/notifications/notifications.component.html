@@ -1,0 +1,8 @@
+<div class="text-center mat-bg-primary pt-16 pb-16">
+  <h6 class="m-0 text-white">Notifications</h6>
+</div>
+<mat-nav-list class="notification-list" role="list">
+</mat-nav-list>
+<div class="text-center mt-16" *ngIf="notifications.length">
+  <small><a href="#" (click)="clearAll($event)">Clear all notifications</a></small>
+</div>

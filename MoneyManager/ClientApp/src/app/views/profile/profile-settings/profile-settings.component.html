@@ -1,0 +1,42 @@
+<mat-card class="p-0">
+  <mat-tab-group>
+    <mat-tab label="Account Settings">
+      <mat-card-content class="mt-16">
+        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="firstName"
+                   name="firstName"
+                   placeholder="Name"
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="lastName"
+                   type="text"
+                   name="lastName"
+                   placeholder="Surname"
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="email"
+                   type="email"
+                   name="email"
+                   placeholder="Email"
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="age"
+                   type="number"
+                   name="age"
+                   placeholder="Age"
+                   value="">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Save</button>
+        </form>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

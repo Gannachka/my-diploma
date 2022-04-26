@@ -1,0 +1,61 @@
+<div fxLayout="row wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+    <!-- Time line -->
+    <mat-card class="default">
+      <mat-card-title>Timeline</mat-card-title>
+      <div class="row pt-2">  
+        <div class="col-ms-12">
+          <div class="card">
+            <div class="card-body text-left card-box">
+              <span class="card-text card-news-title display-5 p-3">Treading {{RssData?.rss.channel[0].title[0]}} News</span>
+              <div *ngFor="let o of RssData?.rss.channel[0].item;">
+                <div class="news-text-contain p-3">
+                  <a [href]="sanitize(o.link[0])" class="card-text card-contain d-block">{{o.title[0]}}</a>
+                  <span class="text-muted d-inline card-subtext"> CNBC: Top News <span class="dot"> </span> {{getDataDiff(o.pubDate)}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <!-- End Time line -->
+  </div>
+  <!--<div>
+      <mat-card class="default">
+          <mat-card-title>Activity</mat-card-title>
+          <mat-card-content class="p-0" fxLayout="column">
+              <div class="activity-data">
+                  <ngx-datatable class="material bg-white"
+                                 [columnMode]="'force'"
+                                 [headerHeight]="50"
+                                 [footerHeight]="50"
+                                 [rowHeight]="50"
+                                 [limit]="4"
+                                 [rows]="activityData">
+                      <ngx-datatable-column name="Month" [flexGrow]="1">
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                              {{ row?.month }}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Spent" [flexGrow]="1">
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                              {{ row?.spent }}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Opened" [flexGrow]="1">
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                              {{ row?.opened }}
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Closed" [flexGrow]="1">
+                          <ng-template let-row="row" ngx-datatable-cell-template>
+                              {{ row?.closed }}
+                          </ng-template>
+                      </ngx-datatable-column>
+                  </ngx-datatable>
+              </div>
+          </mat-card-content>
+      </mat-card>
+  </div>-->
+</div>
