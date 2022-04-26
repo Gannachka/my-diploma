@@ -19,35 +19,23 @@
         [Column("Email")]
         public string Email { get; set; }
 
-        [Required]
-        [Column("Age")]
-        public int Age { get; set; }
-
-        [Required]
         [Column("DoctorId")]
         [ForeignKey("Doctor")]
-        public int DoctorId { get; set; }
+        public int? DoctorId { get; set; }
 
-        [Required]
+        public Doctor Doctor { get; set; }
+
         [Column("PacientId")]
         [ForeignKey("Pacient")]
-        public int PacientId { get; set; }
+        public int? PacientId { get; set; }
+
+        public Pacient Pacient { get; set; }
 
         [Required]
         [Column("RoleId")]
         [ForeignKey("Role")]
         public int RoleId { get; set; }
 
-        [Required]
-        [Column("FullName")]
-        public string FullName { get; set; }
-
-        [Required]
-        [Column("Username")]
-        public string Username { get; set; }
-
         public virtual Role Role { get; set; }
-
-        public virtual List<Questionaire> Questionaires { get; set; } = new List<Questionaire>();
     }
 }

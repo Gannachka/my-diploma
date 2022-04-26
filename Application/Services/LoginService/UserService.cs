@@ -26,7 +26,7 @@
 
                 if (user != null && user.Role != "Admin")
                 {
-                    await EmailService.SendEmailAsync(email);
+                    await EmailService.SendEmailAsync(email, "НАПОМИНАНИЕ", "ДЕД, ПРИМИ ТАБЛЕТКИ!");
                 }
 
                 return user;
@@ -53,13 +53,20 @@
             }
         }
 
-        public async Task RegisterUser(RegistrationModelDTO registrationModel)
+        public async Task RegisterUser(UserRegistrationModelDTO registrationModel, string verificationURL)
         {
             try
             {
                 var user = mapper.Map<User>(registrationModel);
+
+                // TODO: Uncommit after move to doctor registration
+                //var pacient = mapper.Map<Pacient>(registrationModel);
+                //user.Pacient = pacient;
                 await context.Users.AddAsync(user);
+
                 await context.SaveChangesAsync();
+
+                await EmailService.SendEmailAsync(registrationModel.Email, "Регистрация", $"Вы были зарегистрированы в системе мониторинга хронических заболеваний. </br>Для окончания регистрации перейдите по ссылке: <a href=\"{verificationURL}\">{verificationURL}</a>");
             }
             catch (Exception ex)
             {
@@ -67,20 +74,26 @@
             }
         }
 
-        public async Task UpdateUser(int id,RegistrationModelDTO registrationModel)
+        public async Task UpdateUser(int id, UserRegistrationModelDTO registrationModel)
         {
             try
             {
-                var user = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
+                var pacient = await context.Pacients.FirstOrDefaultAsync(x => x.PatientId == id);
+                var user = (await context.Pacients
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.PatientId == id)).User;
+
                 if (user != null)
                 {
-                   user.Age = registrationModel.Age;
-                   user.FullName = registrationModel.FirstName + " " + registrationModel.LastName;
-                   user.Email = registrationModel.Email;
+                    pacient.Age = registrationModel.Age;
+                    pacient.FullName = registrationModel.FirstName + " " + registrationModel.LastName;
+                    user.Email = registrationModel.Email;
 
                     context.Users.Update(user);
+                    context.Pacients.Update(pacient);
 
                 }
+
                 context.SaveChanges();
             }
             catch (Exception ex)

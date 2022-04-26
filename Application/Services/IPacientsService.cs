@@ -9,7 +9,7 @@ namespace Application.Services
 {
     public interface  IPacientsService
     {
-        Task <List<UserDTO>> GetPacients(int id);
+        Task <List<PacientDTO>> GetPacients(int id);
 
         Task DeletePacient(int id);
     }

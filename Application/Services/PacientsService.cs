@@ -17,13 +17,16 @@ namespace Application.Services
         {
 
         }
-        public async Task <List<UserDTO>>  GetPacients (int id)
+        public async Task <List<PacientDTO>> GetPacients(int id)
         {
             try
             {
-                var user = await context.Users.Where(x => x.RoleId == 1).ToListAsync();              
+                var user = await context.Users
+                    .Include(x => x.Pacient)
+                    .Where(x => x.RoleId == 1 && x.PacientId.HasValue)
+                    .ToListAsync();        
 
-                return mapper.Map<List<User>,List<UserDTO>>(user);
+                return mapper.Map<List<User>,List<PacientDTO>>(user);
             }
 
             catch (Exception ex)
@@ -32,7 +35,7 @@ namespace Application.Services
             }
         }
 
-        public async Task  DeletePacient(int id)
+        public async Task DeletePacient(int id)
         {
             try
             {
@@ -40,8 +43,8 @@ namespace Application.Services
                 if (user != null)
                 {
                     context.Users.Remove(user);
-
                 }
+
                 context.SaveChanges();
             }
             catch (Exception ex)

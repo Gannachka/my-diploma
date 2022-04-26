@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Domain
 {
@@ -10,14 +8,14 @@ namespace Domain
     public class Questionaire
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
+        [Column("Id")]
         public int QuestionId { get; set; }
 
-        [Column("date")]
+        [Column("Date")]
         public DateTime Date { get; set; }
 
         [Required]
-        [Column("temperature")]
+        [Column("Temperature")]
         public double Temperature { get; set; }
 
         [Required]
@@ -25,11 +23,11 @@ namespace Domain
         public string Comments { get; set; }
 
         [Required]
-        [Column("UserId")]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+        [Column("PacientId")]
+        [ForeignKey("Pacient")]
+        public int PacientId { get; set; }
 
-        public User User { get; set; }
+        public Pacient Pacient { get; set; }
     }
 }
 

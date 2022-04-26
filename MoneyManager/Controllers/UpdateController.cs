@@ -19,7 +19,7 @@ namespace MoneyManager.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(RegistrationModelDTO registrationModel)
+        public async Task<IActionResult> UpdateUser(UserRegistrationModelDTO registrationModel)
         {
 
             try

@@ -16,11 +16,12 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(RegistrationModelDTO registrationModel)
+        public async Task<IActionResult> RegisterUser(UserRegistrationModelDTO registrationModel)
         {
             try
             {
-                await userService.RegisterUser(registrationModel);
+                var URL = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/verify";
+                await userService.RegisterUser(registrationModel, URL);
                 return Ok(new 
                 { 
                     Message = "Registration finished successfully"

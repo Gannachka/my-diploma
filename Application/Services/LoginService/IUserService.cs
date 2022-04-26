@@ -11,8 +11,8 @@ namespace Application.Services.LoginService
 
         Task<LoginDTO> GetUserById(int id);
 
-        Task RegisterUser(RegistrationModelDTO registrationModel);
+        Task RegisterUser(UserRegistrationModelDTO registrationModel, string verificationURL);
 
-        Task UpdateUser(int id, RegistrationModelDTO registrationModel);
+        Task UpdateUser(int id, UserRegistrationModelDTO registrationModel);
     }
 }
