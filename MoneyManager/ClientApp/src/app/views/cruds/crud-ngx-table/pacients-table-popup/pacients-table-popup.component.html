@@ -1,0 +1,46 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+<form [formGroup]="itemForm" (ngSubmit)="submit()">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Фамилия Имя Отчество</mat-label>
+      <input matInput
+             formControlName="fullName"
+             type="text"
+             name="fullName"
+             placeholder="" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Электронная почта</mat-label>
+      <input matInput
+             formControlName="email"
+             type="email"
+             name="email"
+             placeholder="" />
+    </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Возраст</mat-label>
+      <input matInput
+             formControlName="age"
+             type="number"
+             name="age"
+             placeholder="" />
+    </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Диагноз</mat-label>
+      <input matInput
+             formControlName="diagnosis"
+             type="text"
+             name="diagnosis"
+             placeholder="" />
+    </mat-form-field>
+
+    <div fxFlex="100" class="mt-16">
+      <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"Добавить" | translate }}</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Назад</button>
+    </div>
+  </div>
+</form>

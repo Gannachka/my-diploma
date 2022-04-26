@@ -2,20 +2,12 @@
   <mat-tab-group>
     <mat-tab label="Account Settings">
       <mat-card-content class="mt-16">
-        <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+        <form *ngIf="getUserRole() === 'User'" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="firstName"
-                   name="firstName"
-                   placeholder="Name"
-                   value="">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput
-                   formControlName="lastName"
-                   type="text"
-                   name="lastName"
-                   placeholder="Surname"
+                   formControlName="fullName"
+                   name="fullName"
+                   placeholder="Ф.И.О."
                    value="">
           </mat-form-field>
           <mat-form-field class="full-width">
@@ -23,7 +15,7 @@
                    formControlName="email"
                    type="email"
                    name="email"
-                   placeholder="Email"
+                   placeholder="Электронная почта"
                    value="">
           </mat-form-field>
           <mat-form-field class="full-width">
@@ -31,10 +23,45 @@
                    formControlName="age"
                    type="number"
                    name="age"
-                   placeholder="Age"
+                   placeholder="Возраст"
                    value="">
           </mat-form-field>
-          <button mat-raised-button color="primary">Save</button>
+          <button mat-raised-button color="primary">Сохранить</button>
+        </form>
+
+        <form *ngIf="getUserRole() === 'Doctor'" [formGroup]="doctorSettingsForm" (ngSubmit)="onDoctorSubmit()">
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="fullName"
+                   name="fullName"
+                   placeholder="Ф.И.О."
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="email"
+                   type="email"
+                   name="email"
+                   placeholder="Электронная почта"
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="phoneNumber"
+                   type="text"
+                   name="phoneNumber"
+                   placeholder="Номер телефона"
+                   value="">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput
+                   formControlName="workExperience"
+                   type="number"
+                   name="workExperience"
+                   placeholder="Опыт работы"
+                   value="">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Сохранить</button>
         </form>
       </mat-card-content>
     </mat-tab>

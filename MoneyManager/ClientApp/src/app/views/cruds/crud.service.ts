@@ -25,6 +25,9 @@ export class CrudService {
   addAppointment(item): Observable<any> {
     return this.http.post('/api/appointment', item);
   }
+  addPacient(item): Observable<any> {
+    return this.http.post('/api/register', item);
+  }
   addItem(item): Observable<any> {
     return this.http.post('/api/transaction', item);
   }

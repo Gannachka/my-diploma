@@ -20,6 +20,10 @@
                 {
                     Description = "Admin"
                 });
+                sampleRole.Add(new Role()
+                {
+                    Description = "Doctor"
+                });
 
                 context.Roles.AddRange(sampleRole);
 

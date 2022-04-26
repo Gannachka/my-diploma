@@ -12,19 +12,23 @@
         public UserProfile()
         {
             CreateMap<User, LoginDTO>()
-                .ForMember("DisplayName", src => src.MapFrom(x => x.PacientId.HasValue ? x.Pacient.FullName : x.Doctor.FullName))
-                .ForMember("Role", src => src.MapFrom(x => x.Role.Description))
-                .ForMember("Id", src => src.MapFrom(x => x.UserId));
+                .ForMember(res => res.DisplayName, src => src.MapFrom(x => x.PacientId.HasValue ? x.Pacient.FullName : x.Doctor.FullName))
+                .ForMember(res => res.Role, src => src.MapFrom(x => x.Role.Description))
+                .ForMember(res => res.Id, src => src.MapFrom(x => x.UserId));
 
 
             CreateMap<UserRegistrationModelDTO, User>()
                 .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
-                .ForMember(res => res.Password, src => src.MapFrom(x => CryptoService.ComputeHash(x.Password)))
+                .ForMember(res => res.Password, src => src.MapFrom(x => CryptoService.ComputeHash("")))
                 .ForMember(res => res.RoleId, src => src.MapFrom(x => 1))
-                .ForMember(res => res.DoctorId, src => src.Ignore());
+                .ForMember(res => res.DoctorId, src => src.AllowNull());
+
+            CreateMap<PasswordSetupModelDTO, User>()
+                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
+                .ForMember(res => res.Password, src => src.MapFrom(x => CryptoService.ComputeHash(x.Password)));
 
             CreateMap<UserRegistrationModelDTO, Pacient>()
-                .ForMember(res => res.FullName, src => src.MapFrom(x => x.FirstName + " " + x.LastName))
+                .ForMember(res => res.FullName, src => src.MapFrom(x => x.FullName))
                 .ForMember(res => res.Age, src => src.MapFrom(x => x.Age))
                 .ForMember(res => res.DoctorId, src => src.MapFrom(x => x.DoctorId))
                 .ForMember(res => res.Diagnosis, src => src.MapFrom(x => x.Diagnosis ?? ""));

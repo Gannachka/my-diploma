@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Application.Services.PacientService
 {
     public interface  IPacientsService
     {
         Task <List<PacientDTO>> GetPacients(int id);
 
         Task DeletePacient(int id);
+
+        Task RegisterPacient(UserRegistrationModelDTO registrationModel, string verificationURL, int doctorId);
     }
 }

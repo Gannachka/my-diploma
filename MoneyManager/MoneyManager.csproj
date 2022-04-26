@@ -43,6 +43,7 @@
     <None Remove="ClientApp\src\app\views\app-chats\MessageDTO.ts" />
     <None Remove="ClientApp\src\app\views\charts\charts.service.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
+    <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +58,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\views\app-chats\MessageDTO.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\charts\charts.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

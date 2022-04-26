@@ -29,24 +29,17 @@ export class Signup4Component implements OnInit {
 
     this.signupForm = this.fb.group(
       {
-        firstName: ["", Validators.required],
-        lastName: ["", Validators.required],
-        username: ["", Validators.required],
-        age: ["", Validators.required],
         email: ["", [Validators.required, Validators.email]],
         password: password,
-        agreed: [false, Validators.required]
+        confirmPassword: confirmPassword
       }
     );
   }
 
   onSubmit() {
     if (!this.signupForm.invalid) {
-      return this.http.post('/api/register',
+      return this.http.post('/api/setupcomplete',
         {
-          firstName: this.signupForm.value.firstName,
-          lastName: this.signupForm.value.lastName,
-          username: this.signupForm.value.username,
           email: this.signupForm.value.email,
           password: this.signupForm.value.password
         })
@@ -54,7 +47,12 @@ export class Signup4Component implements OnInit {
           this.router.navigateByUrl('/sessions/signin');
         }, err => {
           this.errorMsg = err.message;
-          this.snack.open('uncorrect e-mail or password', 'Error', { duration: 4000 })
+          if (err.message === 'Пользователь не найден') {
+            this.snack.open('Пользователь не найден', 'Error', { duration: 4000 })
+          }
+          else {
+            this.snack.open('uncorrect e-mail or password', 'Error', { duration: 4000 })
+          }         
         })
     };
   }

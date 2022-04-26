@@ -24,7 +24,6 @@
         [HttpPost]
         public async Task<IActionResult> Auth(RequestLoginDTO requestLogin)
         {
-            Console.WriteLine("REQUEST LOGIN:   " + requestLogin);
             try
             {
                 var user = await userService.GetUserByEmail(

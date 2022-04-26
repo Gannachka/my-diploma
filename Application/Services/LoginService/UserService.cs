@@ -2,12 +2,12 @@
 {
     using DTOs.UserDTOs;
     using AutoMapper;
-    using Domain;
-    using Infrastructure.DefaultSettings;
     using Microsoft.EntityFrameworkCore;
     using Persistence;
     using System;
     using System.Threading.Tasks;
+    using System.Linq;
+    using Domain;
 
     public class UserService : BaseService, IUserService 
     {
@@ -16,15 +16,61 @@
 
         }
 
+        public async Task CompleteSetup(PasswordSetupModelDTO passwordSetupModel)
+        {
+            try
+            {
+                var user = mapper.Map<User>(passwordSetupModel);
+
+                var existingUser = await context.Users
+                    .Where(x => x.Email == user.Email)
+                    .FirstOrDefaultAsync();
+
+                if (existingUser != null)
+                {
+                    existingUser.Password = user.Password;
+                    context.Users.Update(existingUser);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Пользователь не найден");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> GetDoctorIdByUserId(int userId)
+        {
+            try
+            {
+                var doctorId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.DoctorId)
+                    .FirstOrDefaultAsync();
+
+                return doctorId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<LoginDTO> GetUserByEmail(string email, string password)
         {
             try
             {
                 var user = mapper.Map<LoginDTO>(await context.Users
                     .Include(x => x.Role)
+                    .Include(x => x.Doctor)
+                    .Include(x => x.Pacient)
                     .SingleOrDefaultAsync(x => x.Email == email && x.Password == password));
 
-                if (user != null && user.Role != "Admin")
+                if (user != null && user.Role != "Admin" && user.Role != "Doctor")
                 {
                     await EmailService.SendEmailAsync(email, "НАПОМИНАНИЕ", "ДЕД, ПРИМИ ТАБЛЕТКИ!");
                 }
@@ -43,30 +89,11 @@
             {
                 var user = mapper.Map<LoginDTO>(await context.Users
                     .Include(x => x.Role)
+                    .Include(x => x.Doctor)
+                    .Include(x => x.Pacient)
                     .SingleOrDefaultAsync(x => x.UserId == id));
 
                 return user;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        public async Task RegisterUser(UserRegistrationModelDTO registrationModel, string verificationURL)
-        {
-            try
-            {
-                var user = mapper.Map<User>(registrationModel);
-
-                // TODO: Uncommit after move to doctor registration
-                //var pacient = mapper.Map<Pacient>(registrationModel);
-                //user.Pacient = pacient;
-                await context.Users.AddAsync(user);
-
-                await context.SaveChangesAsync();
-
-                await EmailService.SendEmailAsync(registrationModel.Email, "Регистрация", $"Вы были зарегистрированы в системе мониторинга хронических заболеваний. </br>Для окончания регистрации перейдите по ссылке: <a href=\"{verificationURL}\">{verificationURL}</a>");
             }
             catch (Exception ex)
             {
@@ -78,23 +105,46 @@
         {
             try
             {
-                var pacient = await context.Pacients.FirstOrDefaultAsync(x => x.PatientId == id);
-                var user = (await context.Pacients
+                var pacient = await context.Pacients
                     .Include(x => x.User)
-                    .FirstOrDefaultAsync(x => x.PatientId == id)).User;
+                    .FirstOrDefaultAsync(x => x.User.UserId == id);
 
-                if (user != null)
+                if (pacient != null)
                 {
                     pacient.Age = registrationModel.Age;
-                    pacient.FullName = registrationModel.FirstName + " " + registrationModel.LastName;
-                    user.Email = registrationModel.Email;
+                    pacient.FullName = registrationModel.FullName;
+                    pacient.User.Email = registrationModel.Email;
 
-                    context.Users.Update(user);
                     context.Pacients.Update(pacient);
-
                 }
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateDoctor(int id, DoctorRegistrationModelDTO registrationModel)
+        {
+            try
+            {
+                var doctor = await context.Doctors
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.User.UserId == id);
+
+                if (doctor != null)
+                {
+                    doctor.WorkExperience = registrationModel.WorkExperience;
+                    doctor.FullName = registrationModel.FullName;
+                    doctor.PhoneNumber = registrationModel.PhoneNumber;
+                    doctor.User.Email = registrationModel.Email;
+
+                    context.Doctors.Update(doctor);
+                }
+
+                await context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
