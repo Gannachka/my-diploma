@@ -1,8 +1,8 @@
 ﻿namespace MoneyManager.Controllers
 {
     using Application.DTOs.UserDTOs;
+    using Application.Services.DoctorService;
     using Application.Services.LoginService;
-    using Application.Services.PacientService;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -12,13 +12,42 @@
     [Authorize]
     public class DoctorController : BaseApiController
     {
-        private readonly IPacientsService pacientsService;
-        private readonly IUserService userService;
 
-        public DoctorController(IPacientsService pacientsService, IUserService userService)
+        private readonly IUserService userService;
+        private readonly IDoctorService doctorService;
+
+        public DoctorController(IDoctorService doctorService, IUserService userService)
         {
-            this.pacientsService = pacientsService;
             this.userService = userService;
+            this.doctorService = doctorService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDoctors()
+        {
+
+            try
+            {
+                _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value, out int id);
+
+                if (id > 0)
+                {
+                    return Ok(await doctorService.GetDoctors(await userService.GetAdminIdByUserId(id)));
+
+                }
+
+                return BadRequest(new
+                {
+                    Message = "User can't be found"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Error occurred while search for transactions"
+                });
+            }
         }
 
         [HttpPut]

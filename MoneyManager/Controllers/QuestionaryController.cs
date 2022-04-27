@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.QuestionarityDTO;
+using Application.Services.LoginService;
 using Application.Services.QuestionaryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace MoneyManager.Controllers
     [Authorize]
     public class QuestionaryController:BaseApiController
     {
-        private IQuestionaryService questionaryService;
+        private readonly IQuestionaryService questionaryService;
+        private readonly IUserService userService;
 
-        public QuestionaryController(IQuestionaryService questionaryService)
+        public QuestionaryController(IQuestionaryService questionaryService, IUserService userService)
         {
             this.questionaryService = questionaryService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -56,8 +59,7 @@ namespace MoneyManager.Controllers
 
                 if (id > 0)
                 {
-                    return Ok(await questionaryService.CreateQuestionairy(id, questinary));
-
+                    return Ok(await questionaryService.CreateQuestionairy(await userService.GetPacientIdByUserId(id), questinary));
                 }
 
                 return BadRequest(new

@@ -20,6 +20,12 @@
         [Required]
         public int WorkExperience { get; set; }
 
+        [Column("AdminId")]
+        [ForeignKey("Admin")]
+        public int? AdminId { get; set; }
+
+        public Admin Admin { get; set; }
+
         public virtual List<Pacient> Pacients { get; set; } = new List<Pacient>();
 
         public User User { get; set; }

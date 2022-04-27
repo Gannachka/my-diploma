@@ -37,5 +37,11 @@
         public int RoleId { get; set; }
 
         public virtual Role Role { get; set; }
+
+        [Column("AdminId")]
+        [ForeignKey("Admin")]
+        public int? AdminId { get; set; }
+
+        public Admin Admin { get; set; }
     }
 }

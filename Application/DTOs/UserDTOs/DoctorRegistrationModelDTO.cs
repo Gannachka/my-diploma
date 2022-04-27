@@ -9,5 +9,7 @@
         public int WorkExperience { get; set; }
 
         public string Email { get; set; }
+
+        public int? AdminId { get; set; }
     }
 }

@@ -60,6 +60,40 @@
             }
         }
 
+        public async Task<int> GetPacientIdByUserId(int userId)
+        {
+            try
+            {
+                var doctorId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.PacientId)
+                    .FirstOrDefaultAsync();
+
+                return doctorId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> GetAdminIdByUserId(int userId)
+        {
+            try
+            {
+                var adminId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.AdminId)
+                    .FirstOrDefaultAsync();
+
+                return adminId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<LoginDTO> GetUserByEmail(string email, string password)
         {
             try

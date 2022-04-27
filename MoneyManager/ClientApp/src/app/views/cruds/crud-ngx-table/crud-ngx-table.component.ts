@@ -8,11 +8,13 @@ import { NgxTablePopupComponent } from './ngx-table-popup/ngx-table-popup.compon
 import { Subject, Subscription } from 'rxjs';
 import { egretAnimations } from "../../../shared/animations/egret-animations";
 import { DisplayTransactionModel } from '../../../shared/models/display.transaction.model';
+import { DisplayDoctorModel } from '../../../shared/models/display.doctor.model';
 import { AppCalendarService } from '../../app-calendar/app-calendar.service';
 import { EgretCalendarEvent } from '../../../shared/models/event.model';
 import { LocalStoreService } from '../../../shared/services/local-store.service';
 import { AppointmentTablePopupComponent } from './appointment-table-popup/appointment-table-popup.component';
 import { PacientsTablePopupComponent } from './pacients-table-popup/pacients-table-popup.component';
+import { DoctorsTablePopupComponent } from './doctors-table-popup/doctors-table-popup.component';
 
 @Component({
   selector: 'app-crud-ngx-table',
@@ -23,6 +25,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   public minage;
   public maxage;
   public items: DisplayTransactionModel[];
+  public doctors: DisplayDoctorModel[];
   public questionaries: any[];
   public appointments: any[];
   public getItemSub: Subscription;
@@ -46,7 +49,9 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
     } else if (this.getUserRole() === 'User') {
       this.getAppointments();
       this.getMyQuestionaries();
-    }
+    } else if (this.getUserRole() === 'Admin') {
+      this.getDoctors();
+  }
   }
   ngOnDestroy() {
     if (this.getItemSub) {
@@ -57,11 +62,23 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   search() {
     this.items = this.items.filter(x => x.age >= this.minage && x.age <= this.maxage);
   }
+
   getItems() {
     this.getItemSub = this.crudService.getItems()
       .subscribe(
         data => {
           this.items = data;
+        },
+        error => {
+          this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
+        });
+  }
+
+  getDoctors() {
+    this.getItemSub = this.crudService.getDoctors()
+      .subscribe(
+        data => {
+          this.doctors = data;
         },
         error => {
           this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
@@ -153,6 +170,36 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
                 this.items = data;
                 this.loader.close();
                 this.snack.open('Пациент добавлен!', 'OK', { duration: 4000 })
+              },
+              error => {
+                this.loader.close();
+                this.snack.open(error.error.message, 'OK', { duration: 4000 })
+              });
+        }
+      });
+  }
+
+  openAddingDoctorPopUp(data: any = {}, isNew) {
+    const title = 'Добавить нового доктора';
+    const dialogRef: MatDialogRef<any> = this.dialog.open(DoctorsTablePopupComponent, {
+      width: '720px',
+      disableClose: true,
+      data: { title, payload: data }
+    });
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        if (!res) {
+          this.getDoctors();
+          return;
+        }
+        this.loader.open();
+        if (isNew) {
+          this.crudService.addDoctor(res)
+            .subscribe(
+              data => {
+                this.doctors = data;
+                this.loader.close();
+                this.snack.open('Доктор добавлен!', 'OK', { duration: 4000 })
               },
               error => {
                 this.loader.close();

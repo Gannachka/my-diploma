@@ -1,6 +1,7 @@
 using Application.Profiles;
 using Application.Services;
 using Application.Services.AppointmentService;
+using Application.Services.DoctorService;
 using Application.Services.LoginService;
 using Application.Services.PacientService;
 using Application.Services.QuestionaryService;
@@ -77,6 +78,7 @@ namespace MoneyManager
             services.AddTransient<IPacientsService, PacientsService>();
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IQuestionaryService, QuestionaryService>();
+            services.AddTransient<IDoctorService, DoctorService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
