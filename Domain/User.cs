@@ -31,6 +31,8 @@
 
         public Pacient Pacient { get; set; }
 
+        public bool IsOnline { get; set; }
+
         [Required]
         [Column("RoleId")]
         [ForeignKey("Role")]

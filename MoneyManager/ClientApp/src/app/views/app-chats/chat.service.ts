@@ -3,57 +3,59 @@ import * as signalR from '@microsoft/signalr';          // import signalR
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { MessageDto } from './MessageDTO';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class SignalrClientService {
 
-  private connection: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:44363/chatsocket")   // mapping to the chathub as in startup.cs
-    .configureLogging(signalR.LogLevel.Information)
-    .build();
-  readonly POST_URL = "https://localhost:44363/api/chat/send"
+  userName: string;
+  connection: signalR.HubConnection;
+  messenger = new Subject<ReceiveMessage>();
+  onlineUsers = new Subject<User[]>();
 
-  private receivedMessageObject: MessageDto = new MessageDto();
-  private sharedObj = new Subject<MessageDto>();
-
-  constructor(private http: HttpClient) {
-    this.connection.onclose(async () => {
-      await this.start();
-    });
-    this.connection.on("ReceiveOne", (user, message) => { this.mapReceivedMessage(user, message); });
-    this.start();
+  constructor() {
   }
 
+  sendMessage(message: string) {
+    return this.connection.invoke("SendMessage", this.userName, message)
+  }
+  openConnection() {
+    this.connection = new signalR.HubConnectionBuilder()
+      .withUrl(`/api/chatsocket?username=${this.userName}`)
+      .build();
 
-  // Strart the connection
-  public async start() {
-    try {
-      await this.connection.start();
+    this.connection.start().then(res => {
       console.log("connected");
-    } catch (err) {
-      console.log(err);
-      setTimeout(() => this.start(), 5000);
-    }
+    });
+    // add handler
+    this.chatMessageHandler();
   }
-
-  private mapReceivedMessage(user: string, message: string): void {
-    this.receivedMessageObject.user = user;
-    this.receivedMessageObject.msgText = message;
-    this.sharedObj.next(this.receivedMessageObject);
+  chatMessageHandler() {
+    this.connection.on("ReceiveMessage", (user, message) => {
+      this.messenger.next({
+        userName: user, message: message, isSender: false
+      });
+    });
+    this.connection.on("OnlineUsers", (user: User[]) => {
+      //console.log("user", user);
+      this.onlineUsers.next(user);
+    });
   }
-
-  /* ****************************** Public Mehods **************************************** */
-
-  // Calls the controller method
-  public broadcastMessage(msgDto: any) {
-    this.http.post(this.POST_URL, msgDto).subscribe(data => console.log(data));
-    // this.connection.invoke("SendMessage1", msgDto.user, msgDto.msgText).catch(err => console.error(err));    // This can invoke the server method named as "SendMethod1" directly.
+  onSendMessage() {
+    this._signalrClientService.sendMessage(this.message).then(res => {
+      this.chatContainer.push({ message: this.message, userName: this._signalrClientService.userName, isSender: true })
+    });
   }
-
-  public retrieveMappedObject(): Observable<MessageDto> {
-    return this.sharedObj.asObservable();
+  openUserDialog() {
+    const dialogRef = this.dialog.open(UserDetailsComponent, { hasBackdrop: false });
+    dialogRef.afterClosed().subscribe((userName: string) => {
+      this.connectHub(userName);
+    });
   }
-
-
+  connectHub(userName: string) {
+    this._signalrClientService.userName = userName;
+    this._signalrClientService.openConnection();
+  }
 }

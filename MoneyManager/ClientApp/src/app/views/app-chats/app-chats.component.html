@@ -5,20 +5,51 @@
     <!-- Right side -->
     <div class="chats-wrap">
       <!-- Right side topbar -->
-      <div class="ud-header">
-        <h2 class="text-center">Public Chat</h2>
-      </div>
-      <div class="ud-body">
-        <div class="msg-box">
-          <ul>
-            <li *ngFor="let mObj of msgInboxArray" [ngClass]="mObj.user === msgDto.user ? 'in-msg' : 'ex-msg'">{{mObj.user}} :<br /><span class="msg-italic-style">{{mObj.msgText}}</span></li>
-          </ul>
+      <div class="container">
+        <div class="user-container">
+          <div class="user-profile">
+            <div class="user-pic"> </div>
+            <div class="user-name">User Name</div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="user-list">
+            <mat-list *ngIf="onlineUsers">
+              <mat-list-item *ngFor="let user of onlineUsers ">
+                <mat-icon mat-list-icon color="primary">account_circle</mat-icon>
+                <div mat-line>{{user.name}}</div>
+              </mat-list-item>
+            </mat-list>
+          </div>
         </div>
-        <div class="ud-flex-row">
-          <input type="text" placeholder="Type message here" class="msg-input" [(ngModel)]="msgDto.msgText" />
-          <button class="send-btn" (click)="send()"><i class="fa fa-paper-plane"></i></button>
+        <div class="message-container">
+          <mat-list>
+            <mat-list-item *ngFor="let chat of chatContainer">
+              <div mat-line [ngClass]="chat.isSender == true ? 'sender-message-body': 'receiver-message-body'">
+                <div class="user-icon">
+                  <mat-icon mat-list-icon color="primary">portrait</mat-icon>
+                </div>
+                <div class="message-text">
+                  <div class="user-date-label"><span> {{chat.userName}}</span> 9.18 am</div>
+                  <div class="message">{{chat.message}}</div>
+                </div>
+              </div>
+            </mat-list-item>
+          </mat-list>
+
+          <div class="input-container">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Message</mat-label>
+                <input matInput placeholder="Placeholder" class="chat-input" [(ngModel)]="message">
+              </mat-form-field>
+            </div>
+            <div class="button-container">
+              <button mat-mini-fab color="primary" (click)="onSendMessage()">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
-        <input type="text" placeholder="Your name" class="name-box" [(ngModel)]="msgDto.user" />
       </div>
 
     </div>

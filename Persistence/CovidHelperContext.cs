@@ -21,5 +21,7 @@ namespace Persistence
         public DbSet<Doctor> Doctors { get; set; }
 
         public DbSet<Pacient> Pacients { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
     }
 }

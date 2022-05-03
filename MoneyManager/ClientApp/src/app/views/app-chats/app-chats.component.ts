@@ -7,34 +7,33 @@ import { MessageDto } from './MessageDTO';
   templateUrl: './app-chats.component.html',
   styleUrls: ['./app-chats.component.scss']
 })
-export class AppChatsComponent implements OnInit {
+export class ChatComponent implements OnInit {
 
-  constructor(private chatService: ChatService) { }
+  message: string;
+  chatContainer: ReceiveMessage[] = [];
+  onlineUsers: User[];
+  subscription: Subscription;
+
+  constructor(
+    public dialog: MatDialog,
+    private _signalrClientService: SignalrClientService) {
+
+    this.subscription = new Subscription();
+
+    //subscribing chat message and online user details
+    this.subscription.add(this._signalrClientService.messenger.subscribe((res: ReceiveMessage) => {
+      this.chatContainer.push(res);
+    }));
+    this.subscription.add(this._signalrClientService.onlineUsers.subscribe((res: User[]) => {
+      this.onlineUsers = res;
+    }));
+
+  }
 
   ngOnInit(): void {
-    this.chatService.retrieveMappedObject().subscribe((receivedObj: MessageDto) => { this.addToInbox(receivedObj); });  // calls the service method to get the new messages sent
-
+    this.openUserDialog();
   }
-
-  msgDto: MessageDto = new MessageDto();
-  msgInboxArray: MessageDto[] = [];
-
-  send(): void {
-    if (this.msgDto) {
-      if (this.msgDto.user.length == 0 || this.msgDto.user.length == 0) {
-        window.alert("Both fields are required.");
-        return;
-      } else {
-        this.chatService.broadcastMessage(this.msgDto);                   // Send the message via a service
-      }
-    }
-  }
-
-  addToInbox(obj: MessageDto) {
-    let newObj = new MessageDto();
-    newObj.user = obj.user;
-    newObj.msgText = obj.msgText;
-    this.msgInboxArray.push(newObj);
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
