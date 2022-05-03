@@ -28,6 +28,8 @@ import { TransactionCategoryComponent } from
 import { AppCalendarService } from '../app-calendar/app-calendar.service';
 import { ColorPickerService } from 'ngx-color-picker';
 import { AppointmentTablePopupComponent } from './crud-ngx-table/appointment-table-popup/appointment-table-popup.component';
+import { PacientsTablePopupComponent } from './crud-ngx-table/pacients-table-popup/pacients-table-popup.component';
+import { DoctorsTablePopupComponent } from './crud-ngx-table/doctors-table-popup/doctors-table-popup.component';
 
 @NgModule({
   imports: [
@@ -52,7 +54,7 @@ import { AppointmentTablePopupComponent } from './crud-ngx-table/appointment-tab
     MatSelectModule,
     FormsModule
   ],
-  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, TransactionCategoryComponent, AppointmentTablePopupComponent],
+  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, TransactionCategoryComponent, AppointmentTablePopupComponent, PacientsTablePopupComponent, DoctorsTablePopupComponent],
   providers: [CrudService, ColorPickerService],
   // entryComponents: [NgxTablePopupComponent]
 })

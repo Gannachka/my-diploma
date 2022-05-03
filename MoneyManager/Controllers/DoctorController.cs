@@ -1,38 +1,38 @@
-﻿using Application.DTOs.QuestionarityDTO;
-using Application.Services.LoginService;
-using Application.Services.QuestionaryService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MoneyManager.Controllers
+﻿namespace MoneyManager.Controllers
 {
-    [Authorize]
-    public class QuestionaryController:BaseApiController
-    {
-        private readonly IQuestionaryService questionaryService;
-        private readonly IUserService userService;
+    using Application.DTOs.UserDTOs;
+    using Application.Services.DoctorService;
+    using Application.Services.LoginService;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
 
-        public QuestionaryController(IQuestionaryService questionaryService, IUserService userService)
+    [Authorize]
+    public class DoctorController : BaseApiController
+    {
+
+        private readonly IUserService userService;
+        private readonly IDoctorService doctorService;
+
+        public DoctorController(IDoctorService doctorService, IUserService userService)
         {
-            this.questionaryService = questionaryService;
             this.userService = userService;
+            this.doctorService = doctorService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMyQuestionaries()
+        public async Task<IActionResult> GetDoctors()
         {
+
             try
             {
                 _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value, out int id);
 
                 if (id > 0)
                 {
-                    return Ok(await questionaryService.GetQuestionaires(id));
+                    return Ok(await doctorService.GetDoctors(await userService.GetAdminIdByUserId(id)));
 
                 }
 
@@ -50,16 +50,17 @@ namespace MoneyManager.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateQuestionaries(QuestionarityDTO questinary)
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(DoctorRegistrationModelDTO registrationModel)
         {
+
             try
             {
                 _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value, out int id);
-
                 if (id > 0)
                 {
-                    return Ok(await questionaryService.CreateQuestionairy(await userService.GetPacientIdByUserId(id), questinary));
+                    await userService.UpdateDoctor(id, registrationModel);
+                    return StatusCode(200);
                 }
 
                 return BadRequest(new
@@ -71,9 +72,10 @@ namespace MoneyManager.Controllers
             {
                 return StatusCode(500, new
                 {
-                    Message = "Error occurred while search for transactions"
+                    Message = "Authentication failed"
                 });
             }
+
         }
     }
 }

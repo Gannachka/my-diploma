@@ -1,10 +1,8 @@
 export class DisplayTransactionModel {
+
   public id: string;
-  public amount: number;
-  public storedAmount: number;
-  public isRepeatable: boolean;
-  public transactionType: string;
-  public transactionCategory: string;
+  public email: string;
+  public role: string;
   public transactionDate: Date;
   public age: number;
 }

@@ -20,7 +20,7 @@ namespace Application.Services.QuestionaryService
         public async Task<List<Questionaire>> CreateQuestionairy(int id, QuestionarityDTO questionarity)
         {
             var questionaryDB = mapper.Map<Questionaire>(questionarity);
-            questionaryDB.UserId = id;
+            questionaryDB.PacientId = id;
             context.Questionaire.Add(questionaryDB);
             await context.SaveChangesAsync();
             return await GetQuestionaires(id);
@@ -28,7 +28,7 @@ namespace Application.Services.QuestionaryService
 
         public async Task<List<Questionaire>> GetQuestionaires(int id)
         {
-            return await context.Questionaire.Where(x => x.UserId == id).ToListAsync();
+            return await context.Questionaire.Where(x => x.PacientId == id).ToListAsync();
         }
     }
 }

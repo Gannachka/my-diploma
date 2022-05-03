@@ -2,12 +2,12 @@
 {
     using DTOs.UserDTOs;
     using AutoMapper;
-    using Domain;
-    using Infrastructure.DefaultSettings;
     using Microsoft.EntityFrameworkCore;
     using Persistence;
     using System;
     using System.Threading.Tasks;
+    using System.Linq;
+    using Domain;
 
     public class UserService : BaseService, IUserService 
     {
@@ -16,17 +16,97 @@
 
         }
 
+        public async Task CompleteSetup(PasswordSetupModelDTO passwordSetupModel)
+        {
+            try
+            {
+                var user = mapper.Map<User>(passwordSetupModel);
+
+                var existingUser = await context.Users
+                    .Where(x => x.Email == user.Email)
+                    .FirstOrDefaultAsync();
+
+                if (existingUser != null)
+                {
+                    existingUser.Password = user.Password;
+                    context.Users.Update(existingUser);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Пользователь не найден");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> GetDoctorIdByUserId(int userId)
+        {
+            try
+            {
+                var doctorId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.DoctorId)
+                    .FirstOrDefaultAsync();
+
+                return doctorId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> GetPacientIdByUserId(int userId)
+        {
+            try
+            {
+                var doctorId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.PacientId)
+                    .FirstOrDefaultAsync();
+
+                return doctorId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> GetAdminIdByUserId(int userId)
+        {
+            try
+            {
+                var adminId = await context.Users
+                    .Where(x => x.UserId == userId)
+                    .Select(x => x.AdminId)
+                    .FirstOrDefaultAsync();
+
+                return adminId.GetValueOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<LoginDTO> GetUserByEmail(string email, string password)
         {
             try
             {
                 var user = mapper.Map<LoginDTO>(await context.Users
                     .Include(x => x.Role)
+                    .Include(x => x.Doctor)
+                    .Include(x => x.Pacient)
                     .SingleOrDefaultAsync(x => x.Email == email && x.Password == password));
 
-                if (user != null && user.Role != "Admin")
+                if (user != null && user.Role != "Admin" && user.Role != "Doctor")
                 {
-                    await EmailService.SendEmailAsync(email);
+                    await EmailService.SendEmailAsync(email, "НАПОМИНАНИЕ", "ДЕД, ПРИМИ ТАБЛЕТКИ!");
                 }
 
                 return user;
@@ -43,6 +123,8 @@
             {
                 var user = mapper.Map<LoginDTO>(await context.Users
                     .Include(x => x.Role)
+                    .Include(x => x.Doctor)
+                    .Include(x => x.Pacient)
                     .SingleOrDefaultAsync(x => x.UserId == id));
 
                 return user;
@@ -53,12 +135,23 @@
             }
         }
 
-        public async Task RegisterUser(RegistrationModelDTO registrationModel)
+        public async Task UpdateUser(int id, UserRegistrationModelDTO registrationModel)
         {
             try
             {
-                var user = mapper.Map<User>(registrationModel);
-                await context.Users.AddAsync(user);
+                var pacient = await context.Pacients
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.User.UserId == id);
+
+                if (pacient != null)
+                {
+                    pacient.Age = registrationModel.Age;
+                    pacient.FullName = registrationModel.FullName;
+                    pacient.User.Email = registrationModel.Email;
+
+                    context.Pacients.Update(pacient);
+                }
+
                 await context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -67,21 +160,25 @@
             }
         }
 
-        public async Task UpdateUser(int id,RegistrationModelDTO registrationModel)
+        public async Task UpdateDoctor(int id, DoctorRegistrationModelDTO registrationModel)
         {
             try
             {
-                var user = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
-                if (user != null)
+                var doctor = await context.Doctors
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.User.UserId == id);
+
+                if (doctor != null)
                 {
-                   user.Age = registrationModel.Age;
-                   user.FullName = registrationModel.FirstName + " " + registrationModel.LastName;
-                   user.Email = registrationModel.Email;
+                    doctor.WorkExperience = registrationModel.WorkExperience;
+                    doctor.FullName = registrationModel.FullName;
+                    doctor.PhoneNumber = registrationModel.PhoneNumber;
+                    doctor.User.Email = registrationModel.Email;
 
-                    context.Users.Update(user);
-
+                    context.Doctors.Update(doctor);
                 }
-                context.SaveChanges();
+
+                await context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

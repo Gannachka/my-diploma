@@ -1,10 +1,9 @@
-﻿using Application.Services;
+﻿using Application.DTOs.UserDTOs;
+using Application.Services.LoginService;
+using Application.Services.PacientService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -14,10 +13,12 @@ namespace MoneyManager.Controllers
     public class PacientsController : BaseApiController
     {
         private readonly IPacientsService pacientsService;
+        private readonly IUserService userService;
 
-        public PacientsController(IPacientsService pacientsService)
+        public PacientsController(IPacientsService pacientsService, IUserService userService)
         {
             this.pacientsService = pacientsService;
+            this.userService = userService;
         }
 
 
@@ -31,7 +32,7 @@ namespace MoneyManager.Controllers
 
                 if (id > 0)
                 {
-                    return Ok(await pacientsService.GetPacients(id));
+                    return Ok(await pacientsService.GetPacients(await userService.GetDoctorIdByUserId(id)));
 
                 }
 
@@ -76,6 +77,34 @@ namespace MoneyManager.Controllers
                     Message = "Error occurred while create transaction"
                 });
             }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserRegistrationModelDTO registrationModel)
+        {
+
+            try
+            {
+                _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value, out int id);
+                if (id > 0)
+                {
+                    await userService.UpdateUser(id, registrationModel);
+                    return StatusCode(200);
+                }
+
+                return BadRequest(new
+                {
+                    Message = "User can't be found"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Authentication failed"
+                });
+            }
+
         }
 
     }

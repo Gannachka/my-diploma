@@ -11,8 +11,16 @@ namespace Application.Services.LoginService
 
         Task<LoginDTO> GetUserById(int id);
 
-        Task RegisterUser(RegistrationModelDTO registrationModel);
+        Task UpdateUser(int id, UserRegistrationModelDTO registrationModel);
 
-        Task UpdateUser(int id, RegistrationModelDTO registrationModel);
+        Task UpdateDoctor(int id, DoctorRegistrationModelDTO registrationModel);
+
+        Task<int> GetDoctorIdByUserId(int userId);
+
+        Task<int> GetPacientIdByUserId(int userId);
+
+        Task<int> GetAdminIdByUserId(int userId);
+
+        Task CompleteSetup(PasswordSetupModelDTO passwordSetupModel);
     }
 }

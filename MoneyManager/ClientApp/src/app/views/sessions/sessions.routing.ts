@@ -12,7 +12,7 @@ export const SessionsRoutes: Routes = [
     path: "",
     children: [
       {
-        path: "signup",
+        path: "completesetup",
         component: Signup4Component,
       },
       {

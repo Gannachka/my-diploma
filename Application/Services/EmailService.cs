@@ -10,16 +10,16 @@ namespace Application.Services
 {
     public static class EmailService
     {
-        public static async Task SendEmailAsync(string email)
+        public static async Task SendEmailAsync(string email, string subject, string body)
         {
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("CovidHelper", "testte5ttest.testtest@yandex.ru"));
             emailMessage.To.Add(new MailboxAddress("", email));
-            emailMessage.Subject = "НАПОМИНАНИЕ";
+            emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = "Не забудьте принять лекарства!!!"
+                Text = body
             };
 
             using (var client = new SmtpClient())

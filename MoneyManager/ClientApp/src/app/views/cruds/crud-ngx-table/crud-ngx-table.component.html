@@ -1,10 +1,12 @@
 <div class="m-333">
   <!-- <span fxFlex></span> -->
-  <button *ngIf="getUserRole() === 'User'" mat-raised-button class="mb-8" color="primary" (click)="openQuestionairePopUp({}, true)">{{"ADD" | translate }} {{"Questionaire" | translate }}</button>
+  <button *ngIf="getUserRole() === 'User'" mat-raised-button class="mb-8" color="primary" (click)="openQuestionairePopUp({}, true)">{{"Ежедневная анкета" | translate }}</button>
+  <button *ngIf="getUserRole() === 'Doctor'" mat-raised-button class="mb-8" color="primary" (click)="openAddingPacientPopUp({}, true)"> {{"Добавить пациента" | translate }}</button>
+  <button *ngIf="getUserRole() === 'Admin'" mat-raised-button class="mb-8" color="primary" (click)="openAddingDoctorPopUp({}, true)"> {{"Добавить доктора" | translate }}</button>
 </div>
 
-<div class="m-333" *ngIf="getUserRole() === 'Admin'">
-  <div fxFlex="33" class="pr-16">
+<div class="m-333" *ngIf="getUserRole() === 'Doctor'">
+  <div fxFlex="33" class="pr-16"> 
     <mat-form-field class="full-width">
       <input matInput
              type="number"
@@ -26,7 +28,7 @@
 </div>
 
 <!--TABLE FOR DOCTOR-->
-<mat-card *ngIf="getUserRole() === 'Admin'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+<mat-card *ngIf="getUserRole() === 'Doctor'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
   <mat-card-content class="p-0">
     <ngx-datatable class="material ml-0 mr-0"
                    [rows]="items"
@@ -36,24 +38,24 @@
                    [scrollbarH]="true"
                    [limit]="10"
                    [rowHeight]="50">
-      <ngx-datatable-column name="Name" [flexGrow]="1">
+      <ngx-datatable-column name="Пациент" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.fullName}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Age" [flexGrow]="1">
+      <ngx-datatable-column name="Возраст" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.age }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Email" [flexGrow]="1">
+      <ngx-datatable-column name="Электронная почта" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.email }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Event" [flexGrow]="1">
+      <ngx-datatable-column name="Препарат" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <button mat-raised-button class="mb-8" color="accent" (click)="openPopUp(row, true)">Add Event</button>
+          <button mat-raised-button class="mb-8" color="accent" (click)="openPopUp(row, true)">Добавить препарат</button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
@@ -72,22 +74,22 @@
                    [scrollbarH]="true"
                    [limit]="10"
                    [rowHeight]="50">
-      <ngx-datatable-column name="Date" [flexGrow]="1">
+      <ngx-datatable-column name="Дата заполнения" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.date | date: 'medium' }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Temperature" [flexGrow]="1">
+      <ngx-datatable-column name="Температура" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.temperature }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Comments" [flexGrow]="1">
+      <ngx-datatable-column name="Самочувствие" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.comments }}
         </ng-template>
       </ngx-datatable-column>
-     
+
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
@@ -102,26 +104,71 @@
                    [scrollbarH]="true"
                    [limit]="10"
                    [rowHeight]="50">
-      <ngx-datatable-column name="Pill" [flexGrow]="1">
+      <ngx-datatable-column name="Препарат" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.pill }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Start Date" [flexGrow]="1">
+      <ngx-datatable-column name="Дата начала приёма" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.startDate | date:'medium' }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="End Date" [flexGrow]="1">
+      <ngx-datatable-column name="Дата завершения приёма" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.endDate | date:'medium' }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Description" [flexGrow]="1">
+      <ngx-datatable-column name="Способ применения" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.appointmentDescription }}
         </ng-template>
       </ngx-datatable-column>
-     </ngx-datatable>
+    </ngx-datatable>
   </mat-card-content>
 </mat-card>
+
+<!--TABLE FOR ADMIN-->
+<mat-card *ngIf="getUserRole() === 'Admin'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+  <mat-card-content class="p-0">
+    <ngx-datatable class="material ml-0 mr-0"
+                   [rows]="doctors"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [scrollbarH]="true"
+                   [limit]="10"
+                   [rowHeight]="50">
+      <ngx-datatable-column name="Доктор" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.fullName}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Номер телефона" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.phoneNumber }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Электронная почта" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.email }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Стаж работы" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.workExperience }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!--добавить disabled or enabled-->
+      <ngx-datatable-column name="Статус" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-raised-button class="mb-8" color="accent" (click)="openPopUp(row, true)">Add Event</button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+
+

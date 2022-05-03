@@ -3,38 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CovidHelperContext))]
-    partial class CovidHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20220426180207_AddDoctorAndPacient")]
+    partial class AddDoctorAndPacient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Domain.Admin", b =>
-                {
-                    b.Property<int>("AdminId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Institution")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Institution");
-
-                    b.HasKey("AdminId");
-
-                    b.ToTable("Admin");
-                });
 
             modelBuilder.Entity("Domain.Appointment", b =>
                 {
@@ -80,10 +65,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdminId")
-                        .HasColumnType("int")
-                        .HasColumnName("AdminId");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -96,8 +77,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DoctorId");
-
-                    b.HasIndex("AdminId");
 
                     b.ToTable("Doctors");
                 });
@@ -189,10 +168,6 @@ namespace Persistence.Migrations
                         .HasColumnName("UserId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdminId")
-                        .HasColumnType("int")
-                        .HasColumnName("AdminId");
-
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int")
                         .HasColumnName("DoctorId");
@@ -216,10 +191,6 @@ namespace Persistence.Migrations
                         .HasColumnName("RoleId");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("AdminId")
-                        .IsUnique()
-                        .HasFilter("[AdminId] IS NOT NULL");
 
                     b.HasIndex("DoctorId")
                         .IsUnique()
@@ -245,15 +216,6 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Doctor", b =>
-                {
-                    b.HasOne("Domain.Admin", "Admin")
-                        .WithMany()
-                        .HasForeignKey("AdminId");
-
-                    b.Navigation("Admin");
-                });
-
             modelBuilder.Entity("Domain.Pacient", b =>
                 {
                     b.HasOne("Domain.Doctor", "Doctor")
@@ -276,10 +238,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.User", b =>
                 {
-                    b.HasOne("Domain.Admin", "Admin")
-                        .WithOne("User")
-                        .HasForeignKey("Domain.User", "AdminId");
-
                     b.HasOne("Domain.Doctor", "Doctor")
                         .WithOne("User")
                         .HasForeignKey("Domain.User", "DoctorId");
@@ -294,18 +252,11 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
-
                     b.Navigation("Doctor");
 
                     b.Navigation("Pacient");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Domain.Admin", b =>
-                {
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Doctor", b =>

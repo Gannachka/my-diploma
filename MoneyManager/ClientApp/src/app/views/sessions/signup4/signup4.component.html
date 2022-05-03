@@ -28,45 +28,8 @@
     <!-- Right side content -->
    <div fxFlex="60" fxLayout="row wrap" fxLayoutAlign="center center">
      <form [formGroup]="signupForm" class="signup4-form mat-bg-card" (ngSubmit)="onSubmit()">
-
        <mat-form-field class="full-width" appearance="outline">
-         <mat-label>First name</mat-label>
-         <input matInput
-                formControlName="firstName"
-                type="text"
-                name="firstName"
-                placeholder="User Name" />
-       </mat-form-field>
-
-       <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Last name</mat-label>
-         <input matInput
-                formControlName="lastName"
-                type="text"
-                name="last_name"
-                placeholder="Last Name" />
-       </mat-form-field>
-
-       <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Age</mat-label>
-         <input matInput
-                formControlName="age"
-                type="number"
-                name="age"
-                placeholder="Age" />
-       </mat-form-field>
-
-       <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Username</mat-label>
-         <input matInput
-                formControlName="username"
-                type="text"
-                name="username"
-                placeholder="Username" />
-       </mat-form-field>
-
-       <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Email</mat-label>
+         <mat-label>Электронная почта</mat-label>
          <input matInput
                 formControlName="email"
                 type="email"
@@ -75,7 +38,7 @@
        </mat-form-field>
 
        <mat-form-field class="full-width" appearance="outline">
-         <mat-label>Password</mat-label>
+         <mat-label>Пароль</mat-label>
          <input matInput
                 formControlName="password"
                 type="password"
@@ -83,19 +46,21 @@
                 placeholder="********" />
        </mat-form-field>
 
+       <mat-form-field class="full-width" appearance="outline">
+         <mat-label>Подтверждение пароля</mat-label>
+         <input matInput
+                type="password"
+                name="confirm_password"
+                placeholder="********"
+                formControlName="confirmPassword" />
+         <mat-error>
+           Пароли не совпадают
+         </mat-error>
+       </mat-form-field>
+
        <div fxLayout="row wrap" fxLayoutAlign="start center" style="margin-top: 20px;">
-         <button mat-flat-button color="primary">Sign Up</button>
-         <span style="padding: 0px 8px 0px 16px;">or</span>
-       
+         <button mat-flat-button color="primary">Сохранить</button>
        </div>
-
-       <!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="margin-top: 20px">
-      <span>or connect with </span>
-      <div>
-        icons goes here
-      </div>
-    </div> -->
-
      </form>
    </div>
   </div>
