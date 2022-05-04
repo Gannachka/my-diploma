@@ -47,6 +47,7 @@
     "date-fns": "2.14.0",
     "echarts": "^4.8.0",
     "flag-icon-css": "3.5.0",
+    "guid-typescript": "^1.0.9",
     "highlight.js": "10.1.1",
     "hopscotch": "0.3.1",
     "install": "0.12.2",

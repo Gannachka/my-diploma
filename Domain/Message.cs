@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -15,14 +12,18 @@ namespace Domain
         public int Id { get; set; }
 
         [Required]
-        [Column("UserID")]
-        [ForeignKey("User")]
-        public int Sender { get; set; }
+        [Column("SenderId")]
+        [ForeignKey("Sender")]
+        public int SenderId { get; set; }
+
+        public User Sender { get; set; }
 
         [Required]
-        [Column("UserID")]
-        [ForeignKey("User")]
-        public int Receiver { get; set; }
+        [Column("ReceiverId")]
+        [ForeignKey("Receiver")]
+        public int ReceiverId { get; set; }
+
+        public User Receiver { get; set; }
 
         [Required]
         public DateTime MessageDate { get; set; }
@@ -38,7 +39,5 @@ namespace Domain
 
         [Required]
         public bool IsReceiverDeleted { get; set; }
-
-        public User User { get; set; }
     }
 }

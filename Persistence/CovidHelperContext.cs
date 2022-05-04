@@ -23,5 +23,18 @@ namespace Persistence
         public DbSet<Pacient> Pacients { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Message>()
+                .HasOne(p => p.Sender)
+                .WithMany()
+                .OnDelete(DeleteBehavior.ClientNoAction);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(p => p.Receiver)
+                .WithMany()
+                .OnDelete(DeleteBehavior.ClientNoAction);
+        }
     }
 }

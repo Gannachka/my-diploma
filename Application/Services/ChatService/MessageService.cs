@@ -64,7 +64,7 @@ namespace Application.Services.ChatService
         {
             try
             {
-                var messages = this.context.Messages.Where(x => x.Receiver == userId).ToList();
+                var messages = this.context.Messages.Where(x => x.Receiver.UserId == userId).ToList();
                 return mapper.Map<List<Message>, List<MessageDTO>>(messages);
             }
             catch (Exception)

@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Controllers
 {
-    [Route("api/message")]
-    [ApiController]
     public class MessageController : BaseApiController
     {
-
         private readonly IMessageService messageService;
+
         public MessageController(IMessageService messageService)
         {
            this.messageService = messageService;
         }
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -23,13 +22,6 @@ namespace MoneyManager.Controllers
             return Ok(messages);
         }
 
-
-        [HttpGet("received-messages/{userId}")]
-        public IActionResult GetUserReceivedMessages(int userId)
-        {
-            var messages = this.messageService.GetReceivedMessages(userId);
-            return Ok(messages);
-        }
         //[HttpPost()]
         //public async Task<IActionResult> DeleteMessage([FromBody] MessageDeleteModelDTO messageDeleteModel)
         //{

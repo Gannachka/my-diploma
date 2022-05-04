@@ -45,5 +45,7 @@
         public int? AdminId { get; set; }
 
         public Admin Admin { get; set; }
+
+        public virtual List<Message> Messages { get; set; } = new List<Message>();
     }
 }
