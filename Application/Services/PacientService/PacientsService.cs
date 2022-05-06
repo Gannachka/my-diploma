@@ -1,4 +1,5 @@
-﻿using Application.DTOs.UserDTOs;
+﻿using Application.DTOs.ChatDTO;
+using Application.DTOs.UserDTOs;
 using AutoMapper;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,24 @@ namespace Application.Services.PacientService
                     .ToListAsync();        
 
                 return mapper.Map<List<User>,List<PacientDTO>>(user);
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MessegeRecipientsSendersDTO>> GetDoctorPacients(int id)
+        {
+            try
+            {
+                var user = await context.Users
+                    .Include(x => x.Pacient)
+                    .Where(x => x.RoleId == 1 && x.PacientId.HasValue && x.Pacient.DoctorId == id)
+                    .ToListAsync();
+
+                return mapper.Map<List<User>, List<MessegeRecipientsSendersDTO>>(user);
             }
 
             catch (Exception ex)

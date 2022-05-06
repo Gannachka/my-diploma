@@ -15,6 +15,7 @@ namespace MoneyManager.Hubs
         {
             this.messageService = messageService;
         }
+
         static IList<UserConnection> Users = new List<UserConnection>();
 
         public class UserConnection
@@ -22,7 +23,6 @@ namespace MoneyManager.Hubs
             public int UserId { get; set; }
             public string ConnectionId { get; set; }
             public string FullName { get; set; }
-            public string Username { get; set; }
         }
 
         public Task SendMessageToUser(MessageDTO message)
@@ -40,24 +40,21 @@ namespace MoneyManager.Hubs
         //    await Clients.All.SendAsync("BroadCastDeleteMessage", Context.ConnectionId, deletedMessage);
         //}
 
-        public async Task PublishUserOnConnect(int id, string fullname, string username)
+        public async Task PublishUserOnConnect(int id, string fullname)
         {
-
-            var existingUser = Users.FirstOrDefault(x => x.Username == username);
+            var existingUser = Users.FirstOrDefault(x => x.UserId == id);
             var indexExistingUser = Users.IndexOf(existingUser);
 
             UserConnection user = new UserConnection
             {
                 UserId = id,
                 ConnectionId = Context.ConnectionId,
-                FullName = fullname,
-                Username = username
+                FullName = fullname
             };
 
             if (!Users.Contains(existingUser))
             {
                 Users.Add(user);
-
             }
             else
             {
@@ -72,7 +69,9 @@ namespace MoneyManager.Hubs
         {
             var user = Users.Where(x => x.UserId == userID).ToList();
             foreach (UserConnection i in user)
+            {
                 Users.Remove(i);
+            }
 
             Clients.All.SendAsync("BroadcastUserOnDisconnect", Users);
         }

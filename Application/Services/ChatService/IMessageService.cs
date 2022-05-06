@@ -8,9 +8,11 @@ namespace Application.Services.ChatService
     public interface IMessageService 
     {
         void Add(MessageDTO message);
-        Task<MessageDTO> DeleteMessage(MessageDeleteModelDTO messageDeleteModel, int id);
-        IEnumerable<MessageDTO> GetAll();
 
-        IEnumerable<MessageDTO> GetReceivedMessages(int userId);
+        Task<MessageDTO> DeleteMessage(MessageDeleteModelDTO messageDeleteModel, int id);
+
+        Task<IEnumerable<MessageDTO>> GetAll();
+
+        Task<IEnumerable<MessageDTO>> GetReceivedMessages(int userId);
     }
 }

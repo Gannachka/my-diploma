@@ -19,17 +19,26 @@ namespace Application.Services.ChatService
         {
            
         }
+
         public void Add(MessageDTO message)
         {
-            this.context.Add(message);
-            this.context.SaveChanges();
+            var messageDB = new Message
+            {
+                SenderId = message.Sender,
+                ReceiverId = message.Receiver,
+                Content = message.Content,
+                IsReceiverDeleted = message.IsReceiverDeleted,
+                IsSenderDeleted = message.IsSenderDeleted,
+                MessageDate = message.MessageDate,
+                IsNew = true
+            };
+            this.context.Messages.Add(messageDB);
+            context.SaveChanges();          
         }
         
-        async Task<MessageDTO> IMessageService.DeleteMessage(MessageDeleteModelDTO messageDeleteModel,int id)
+        public async Task<MessageDTO> DeleteMessage(MessageDeleteModelDTO messageDeleteModel,int id)
         {
-            
-          //  var message = await this.context.Messages.Where(x => x.Id == id).FirstOrDefaultAsync();
-            var message = mapper.Map<MessageDTO>(await this.context.Messages.Where(x => x.Id == id).FirstOrDefaultAsync()                );
+            var message = mapper.Map<MessageDTO>(await context.Messages.Where(x => x.Id == id).FirstOrDefaultAsync());
             if (messageDeleteModel.DeleteType == DeleteTypeEnum.DeleteForEveryone.ToString())
             {
                 message.IsReceiverDeleted = true;
@@ -45,26 +54,36 @@ namespace Application.Services.ChatService
             return message;
         }
 
-        IEnumerable<MessageDTO> IMessageService.GetAll()
+        public async Task<IEnumerable<MessageDTO>> GetAll()
         {
             try
             {
-                var messages = this.context.Messages.OrderBy(x => x.MessageDate).ToList();
-                return mapper.Map<List<Message>, List<MessageDTO>>(messages);
-              
+                var messages = await context.Messages
+                    .Select(x => new MessageDTO
+                    {
+                        Id = x.Id,
+                        MessageDate = x.MessageDate,
+                        Sender = x.SenderId,
+                        Receiver = x.ReceiverId,
+                        Content = x.Content,
+                        IsSenderDeleted = x.IsSenderDeleted,
+                        IsReceiverDeleted = x.IsReceiverDeleted,
+                    })
+                    .OrderBy(x => x.MessageDate)
+                    .ToListAsync();
+                return messages;              
             }
             catch (Exception)
             {
-
                 throw;
             }
 
         }
-        IEnumerable<MessageDTO> IMessageService.GetReceivedMessages(int userId)
+        public async Task<IEnumerable<MessageDTO>> GetReceivedMessages(int userId)
         {
             try
             {
-                var messages = this.context.Messages.Where(x => x.Receiver.UserId == userId).ToList();
+                var messages = await context.Messages.Where(x => x.Receiver.UserId == userId).ToListAsync();
                 return mapper.Map<List<Message>, List<MessageDTO>>(messages);
             }
             catch (Exception)

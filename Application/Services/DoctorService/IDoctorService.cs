@@ -1,4 +1,5 @@
-﻿using Application.DTOs.UserDTOs;
+﻿using Application.DTOs.ChatDTO;
+using Application.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,8 @@ namespace Application.Services.DoctorService
 
         Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId);
 
+        Task<List<MessegeRecipientsSendersDTO>> GetPacientDoctors(int id);
+        Task<List<MessegeRecipientsSendersDTO>> GetAdminDoctors(int id);
+        
     }
 }

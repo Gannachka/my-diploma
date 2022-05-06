@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CovidHelper</title>
-    <meta name="description" content="Pure Angular admin template built with official material design ui library" />
-    <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="icon" type="image/x-icon" href="ficon.ico" />
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <title>CovidHelper</title>
+  <meta name="description" content="Pure Angular admin template built with official material design ui library" />
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="ficon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"
+        rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-    <style>
-      .app-loader {
-        height: 100vh !important;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
+  <style>
+    .app-loader {
+      height: 100vh !important;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      margin: auto;
+    }
+
+    .double-bounce1,
+    .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-animation: sk-bounce 2s infinite ease-in-out;
+      animation: sk-bounce 2s infinite ease-in-out;
+    }
+
+    .double-bounce2 {
+      -webkit-animation-delay: -1s;
+      animation-delay: -1s;
+    }
+
+    @-webkit-keyframes sk-bounce {
+      0%, 100% {
+        -webkit-transform: scale(0);
       }
-      .spinner {
-        width: 40px;
-        height: 40px;
-        position: relative;
-        margin: auto;
+
+      50% {
+        -webkit-transform: scale(1);
       }
-      .double-bounce1,
-      .double-bounce2 {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        opacity: 0.6;
-        position: absolute;
-        top: 0;
-        left: 0;
-        -webkit-animation: sk-bounce 2s infinite ease-in-out;
-        animation: sk-bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes sk-bounce {
+      0%, 100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
       }
-      .double-bounce2 {
-        -webkit-animation-delay: -1s;
-        animation-delay: -1s;
+
+      50% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
       }
-      @-webkit-keyframes sk-bounce {
-        0%,
-        100% {
-          -webkit-transform: scale(0);
-        }
-        50% {
-          -webkit-transform: scale(1);
-        }
-      }
-      @keyframes sk-bounce {
-        0%,
-        100% {
-          transform: scale(0);
-          -webkit-transform: scale(0);
-        }
-        50% {
-          transform: scale(1);
-          -webkit-transform: scale(1);
-        }
-      }
-    </style>
-  </head>
+    }
+  </style>
+</head>
   <body class="egret-navy">
     <app-root>
       <div class="app-loader">
@@ -76,6 +82,9 @@
         </div>
       </div>
     </app-root>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <!-- <script>
     __Zone_enable_cross_context_check = true;

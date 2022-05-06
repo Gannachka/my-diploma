@@ -1,7 +1,6 @@
-﻿using Application.DTOs.ChatDTO;
-using Application.Services.ChatService;
-using Microsoft.AspNetCore.Http;
+﻿using Application.Services.ChatService;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace MoneyManager.Controllers
@@ -16,10 +15,20 @@ namespace MoneyManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var messages = this.messageService.GetAll();
-            return Ok(messages);
+            try
+            {
+                var messages = await this.messageService.GetAll();
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Error occurred while search for transactions"
+                });
+            }
         }
 
         //[HttpPost()]

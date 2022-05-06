@@ -6,7 +6,6 @@
     using Application.Services;
     using AutoMapper;
     using Domain;
-    using System.Collections.Generic;
 
     public class UserProfile : Profile
     {
@@ -50,7 +49,11 @@
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
                .ForMember(res => res.Age, src => src.MapFrom(x => x.Pacient.Age))
                .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId));
-        
+
+            CreateMap<User, MessegeRecipientsSendersDTO>()
+              .ForMember(res => res.FullName, src => src.MapFrom(x => x.Pacient.FullName))
+              .ForMember(res => res.Id, src => src.MapFrom(x => x.UserId));
+
             CreateMap<User, DoctorDTO>()
                .ForMember(res => res.FullName, src => src.MapFrom(x => x.Doctor.FullName))
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
@@ -71,19 +74,17 @@
                 .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Temperature));
 
             CreateMap<MessageDTO, Message>()
-                .ForMember(res => res.Id, src => src.MapFrom(x => x.Id))
-                .ForMember(res => res.Sender, src => src.MapFrom(x => x.Sender))
-                .ForMember(res => res.Receiver, src => src.MapFrom(x => x.Receiver))
+                .ForMember(res => res.SenderId, src => src.MapFrom(x => x.Sender))
+                .ForMember(res => res.ReceiverId, src => src.MapFrom(x => x.Receiver))
                 .ForMember(res => res.MessageDate, src => src.MapFrom(x => x.MessageDate))
                 .ForMember(res => res.Content, src => src.MapFrom(x => x.Content))
-                .ForMember(res => res.IsNew, src => src.MapFrom(x => x.IsNew))
                 .ForMember(res => res.IsSenderDeleted, src => src.MapFrom(x => x.IsSenderDeleted))
                 .ForMember(res => res.IsReceiverDeleted, src => src.MapFrom(x => x.IsReceiverDeleted));
 
             CreateMap<MessageDeleteModelDTO, Message>()
                 .ForMember(res => res.Id, src => src.MapFrom(x => x.Id))
-                .ForMember(res => res.Sender, src => src.MapFrom(x => x.DeletedUserId))
-                .ForMember(res => res.Receiver, src => src.MapFrom(x => x.DeletedUserId));
+                .ForMember(res => res.SenderId, src => src.MapFrom(x => x.DeletedUserId))
+                .ForMember(res => res.ReceiverId, src => src.MapFrom(x => x.DeletedUserId));
 
         }
     }

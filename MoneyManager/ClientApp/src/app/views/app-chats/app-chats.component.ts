@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { environment } from '../../../environments/environment';
-import { UserService } from '../../shared/services/registration.service';
 import { ChatService } from './chat.service';
 import { Guid } from 'guid-typescript';
-import { CrudService } from '../cruds/crud.service';
 import { LocalStoreService } from '../../shared/services/local-store.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app-chats.component.html',
-  styleUrls: ['./app-chats.component.scss']
+  styleUrls: ['./app-chats.component.css']
 })
 export class AppChatsComponent implements OnInit {
 
@@ -40,14 +37,29 @@ export class AppChatsComponent implements OnInit {
         })
         console.log(this.messages);
       }
-    })
+    });
+
+    this.messageService.getAll().subscribe(
+      (user: any) => {
+        if (user) {
+          this.users = user.filter(x => x.id !== this.loggedInUser.id);
+          this.users.forEach(item => {
+            item['isActive'] = false;
+          })
+          this.makeItOnline();
+        }
+      },
+      err => {
+        console.log(err);
+      },
+    );
 
     this.message = ''
-    this.hubConnection = new HubConnectionBuilder().withUrl('/chatsocket').build();
+    this.hubConnection = new HubConnectionBuilder().withUrl('/chatsocket').build(); 
     const self = this
     this.hubConnection.start()
       .then(() => {
-        self.hubConnection.invoke("PublishUserOnConnect", this.loggedInUser.id, this.loggedInUser.firstName, this.loggedInUser.userName)
+        self.hubConnection.invoke("PublishUserOnConnect", this.loggedInUser.id, this.loggedInUser.displayName)
           .then(() => console.log('User Sent Successfully'))
           .catch(err => console.error(err));
 
@@ -73,11 +85,10 @@ export class AppChatsComponent implements OnInit {
         deletedMessage.isReceiverDeleted = message.isReceiverDeleted;
         deletedMessage.isSenderDeleted = message.isSenderDeleted;
         if (deletedMessage.isReceiverDeleted && deletedMessage.receiver === this.chatUser.id) {
-          this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.receiver === this.chatUser.id) || (x.type === 'recieved' && x.sender === this.chatUser.id));
+          this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.id) || (x.receiver === this.chatUser.id && x.sender === this.loggedInUser.id));
         }
       }
-
-    })
+    });
 
     this.hubConnection.on('ReceiveDM', (connectionId, message) => {
       console.log(message);
@@ -90,23 +101,21 @@ export class AppChatsComponent implements OnInit {
       });
       var user = this.users.find(x => x.id == this.chatUser.id);
       user['isActive'] = true;
-      this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.receiver === this.chatUser.id) || (x.type === 'recieved' && x.sender === this.chatUser.id));
+      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
     })
   }
 
   SendDirectMessage() {
     if (this.message != '' && this.message.trim() != '') {
-      let guid = Guid.create();
       var msg = {
-        id: guid.toString(),
         sender: this.loggedInUser.id,
-        receiver: this.chatUser.id,
+        receiver: this.chatUser.userId,
         messageDate: new Date(),
         type: 'sent',
         content: this.message
       };
       this.messages.push(msg);
-      this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.receiver === this.chatUser.id) || (x.type === 'recieved' && x.sender === this.chatUser.id));
+      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
 
       this.hubConnection.invoke('SendMessageToUser', msg)
         .then(() => console.log('Message to user Sent Successfully'))
@@ -121,7 +130,7 @@ export class AppChatsComponent implements OnInit {
     });
     user['isActive'] = true;
     this.chatUser = user;
-    this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.receiver === this.chatUser.id) || (x.type === 'recieved' && x.sender === this.chatUser.id));;
+    this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
   }
 
   makeItOnline() {

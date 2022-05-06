@@ -1,4 +1,5 @@
-﻿using Application.DTOs.UserDTOs;
+﻿using Application.DTOs.ChatDTO;
+using Application.DTOs.UserDTOs;
 using AutoMapper;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace Application.Services.DoctorService
         {
 
         }
+
         public async Task<List<DoctorDTO>> GetDoctors(int id)
         {
             try
@@ -27,6 +29,45 @@ namespace Application.Services.DoctorService
                     .ToListAsync();
 
                 return mapper.Map<List<User>, List<DoctorDTO>>(user);
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MessegeRecipientsSendersDTO>> GetAdminDoctors(int id)
+        {
+            try
+            {
+                var user = await context.Users
+                    .Include(x => x.Doctor)
+                    .Where(x => x.RoleId == 3 && x.DoctorId.HasValue && x.Doctor.AdminId == id)
+                    .ToListAsync();
+
+                return mapper.Map<List<User>, List<MessegeRecipientsSendersDTO>>(user);
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MessegeRecipientsSendersDTO>> GetPacientDoctors(int id)
+        {
+            try
+            {
+                var doctorId = (await context.Pacients
+                    .FirstOrDefaultAsync(x => x.PatientId == id)).DoctorId;
+
+                var user = await context.Users
+                    .Include(x => x.Doctor)
+                    .Where(x => x.RoleId == 3 && x.DoctorId.HasValue && x.DoctorId == doctorId)
+                    .ToListAsync();
+
+                return mapper.Map<List<User>, List<MessegeRecipientsSendersDTO>>(user);
             }
 
             catch (Exception ex)
