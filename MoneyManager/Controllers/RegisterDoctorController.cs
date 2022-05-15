@@ -1,15 +1,16 @@
-﻿using Application.DTOs.UserDTOs;
-using Application.Services.DoctorService;
-using Application.Services.LoginService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MoneyManager.Controllers
+﻿namespace MoneyManager.Controllers
 {
+    using Application.DTOs.UserDTOs;
+    using Application.Services.DoctorService;
+    using Application.Services.LoginService;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    [Authorize]
     public class RegisterDoctorController : BaseApiController
     {
         private readonly IUserService userService;
@@ -21,7 +22,6 @@ namespace MoneyManager.Controllers
             this.doctorService = doctorService;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> RegisterDoctor(DoctorRegistrationModelDTO registrationModel)
         {

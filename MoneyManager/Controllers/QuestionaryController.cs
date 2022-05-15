@@ -1,16 +1,14 @@
-﻿using Application.DTOs.QuestionarityDTO;
-using Application.Services.LoginService;
-using Application.Services.QuestionaryService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MoneyManager.Controllers
+﻿namespace MoneyManager.Controllers
 {
+    using Application.DTOs.QuestionarityDTO;
+    using Application.Services.LoginService;
+    using Application.Services.QuestionaryService;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class QuestionaryController:BaseApiController
     {

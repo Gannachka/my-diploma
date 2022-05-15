@@ -15,7 +15,5 @@ namespace Application.Services.PacientService
         Task DeletePacient(int id);
 
         Task RegisterPacient(UserRegistrationModelDTO registrationModel, string verificationURL, int doctorId);
-
-        Task<List<MessegeRecipientsSendersDTO>> GetDoctorPacients(int id);
     }
 }

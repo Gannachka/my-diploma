@@ -1,14 +1,14 @@
-﻿using Application.DTOs.UserDTOs;
-using Application.Services.LoginService;
-using Application.Services.PacientService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MoneyManager.Controllers
+﻿namespace MoneyManager.Controllers
 {
+    using Application.DTOs.UserDTOs;
+    using Application.Services.LoginService;
+    using Application.Services.PacientService;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class PacientsController : BaseApiController
     {

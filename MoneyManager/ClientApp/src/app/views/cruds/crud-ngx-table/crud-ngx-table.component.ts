@@ -27,6 +27,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   public items: DisplayTransactionModel[];
   public doctors: DisplayDoctorModel[];
   public questionaries: any[];
+  public pacientsQuestionaries: any[];
   public appointments: any[];
   public getItemSub: Subscription;
   private dialogRef: MatDialogRef<NgxTablePopupComponent>;
@@ -46,7 +47,8 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.getUserRole() === 'Doctor') {
       this.getItems();
-    } else if (this.getUserRole() === 'User') {
+      this.getPacientsQuestionaries();
+  }else if(this.getUserRole() === 'User') {
       this.getAppointments();
       this.getMyQuestionaries();
     } else if (this.getUserRole() === 'Admin') {
@@ -101,6 +103,16 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           this.questionaries = data;
+        },
+        error => {
+          this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
+        });
+  }
+  getPacientsQuestionaries() {
+    this.getItemSub = this.crudService.getPacientsQuestionaries()
+      .subscribe(
+        data => {
+          this.pacientsQuestionaries = data;
         },
         error => {
           this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })

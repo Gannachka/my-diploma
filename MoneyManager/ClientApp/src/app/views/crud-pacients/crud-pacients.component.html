@@ -1,0 +1,36 @@
+<div class="m-333">
+  <button  mat-raised-button class="mb-8" color="primary" (click)="openAddingPacientPopUp({}, true)"> {{"Добавить пациента" | translate }}</button>
+</div>
+    <mat-card  class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+      <mat-card-content class="p-0">
+        <ngx-datatable class="material ml-0 mr-0"
+                       [rows]="items"
+                       [columnMode]="'force'"
+                       [headerHeight]="50"
+                       [footerHeight]="50"
+                       [scrollbarH]="true"
+                       [limit]="10"
+                       [rowHeight]="50">
+          <ngx-datatable-column name="Пациент" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row?.fullName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Возраст" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row?.age }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Электронная почта" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row?.email }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Добавить препарат" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <button mat-raised-button class="mb-8" color="accent" (click)="openPopUp(row, true)">Добавить препарат</button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>

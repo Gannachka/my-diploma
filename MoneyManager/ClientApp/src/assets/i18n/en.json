@@ -2,7 +2,7 @@
   "DASHBOARD": "Dashboard",
   "APPS": "Apps",
   "INBOX": "Inbox",
-  "CHAT": "Chat",
+  "CHAT": "Чат",
   "CALENDAR": "Calendar",
   "DIALOGS": "Dialogs",
   "CONFIRM": "Confirm",
@@ -17,7 +17,7 @@
   "CHECKBOX": "Checkbox",
   "DATEPICKER": "Datepicker",
   "RADIO": "Radio",
-  "TOOLBAR": "Toolbar",    
+  "TOOLBAR": "Toolbar",
   "LISTS": "Lists",
   "GRIDS": "Grids",
   "PROGRESS": "Progress",
@@ -67,13 +67,14 @@
   "DOC": "Documentation",
   "NOTFOUND": "Not Found",
   "ERROR": "Error",
-  "OVERVIEW": "Overview",
+  "OVERVIEW": "Главная",
   "SETTINGS": "Settings",
-  
+
   "ECOMMERCE": "Ecommerce",
   "SHOP": "Shop",
   "PRODUCTS": "Products",
   "PRODUCT DETAILS": "Product Details",
   "CART": "Cart",
-  "CHECKOUT": "Checkout"
+  "CHECKOUT": "Checkout",
+  "PACIENTS": "Пациенты"
 }

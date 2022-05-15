@@ -26,6 +26,10 @@ export class CrudService {
     return this.http.get('/api/questionary');
   }
 
+  getPacientsQuestionaries(): Observable<any> {
+    return this.http.get('/api/pacientsQuestionary');
+  }
+
   addQuestioary(item): Observable<any> {
     return this.http.post('/api/questionary', item);
   }

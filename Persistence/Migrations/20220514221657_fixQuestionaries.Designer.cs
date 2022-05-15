@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CovidHelperContext))]
-    partial class CovidHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20220514221657_fixQuestionaries")]
+    partial class fixQuestionaries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,14 +195,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("Date");
 
-                    b.Property<bool>("Headache")
-                        .HasColumnType("bit")
-                        .HasColumnName("Headache");
-
-                    b.Property<bool>("ObstructedBreathing")
-                        .HasColumnType("bit")
-                        .HasColumnName("ObstructedBreathing");
-
                     b.Property<int>("PacientId")
                         .HasColumnType("int")
                         .HasColumnName("PacientId");
@@ -208,10 +202,6 @@ namespace Persistence.Migrations
                     b.Property<double>("Temperature")
                         .HasColumnType("float")
                         .HasColumnName("Temperature");
-
-                    b.Property<bool>("Tiredness")
-                        .HasColumnType("bit")
-                        .HasColumnName("Tiredness");
 
                     b.HasKey("QuestionId");
 

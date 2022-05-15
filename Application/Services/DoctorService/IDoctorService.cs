@@ -12,10 +12,6 @@ namespace Application.Services.DoctorService
     {
         Task<List<DoctorDTO>> GetDoctors(int id);
 
-        Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId);
-
-        Task<List<MessegeRecipientsSendersDTO>> GetPacientDoctors(int id);
-        Task<List<MessegeRecipientsSendersDTO>> GetAdminDoctors(int id);
-        
+        Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId);        
     }
 }

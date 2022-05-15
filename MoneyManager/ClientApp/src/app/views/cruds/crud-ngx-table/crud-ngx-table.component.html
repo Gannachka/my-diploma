@@ -1,12 +1,13 @@
 <div class="m-333">
   <!-- <span fxFlex></span> -->
   <button *ngIf="getUserRole() === 'User'" mat-raised-button class="mb-8" color="primary" (click)="openQuestionairePopUp({}, true)">{{"Ежедневная анкета" | translate }}</button>
-  <button *ngIf="getUserRole() === 'Doctor'" mat-raised-button class="mb-8" color="primary" (click)="openAddingPacientPopUp({}, true)"> {{"Добавить пациента" | translate }}</button>
+  <!--  <button *ngIf="getUserRole() === 'Doctor'" mat-raised-button class="mb-8" color="primary" (click)="openAddingPacientPopUp({}, true)"> {{"Добавить пациента" | translate }}</button>
+  -->
   <button *ngIf="getUserRole() === 'Admin'" mat-raised-button class="mb-8" color="primary" (click)="openAddingDoctorPopUp({}, true)"> {{"Добавить доктора" | translate }}</button>
 </div>
 
 <div class="m-333" *ngIf="getUserRole() === 'Doctor'">
-  <div fxFlex="33" class="pr-16"> 
+  <div fxFlex="33" class="pr-16">
     <mat-form-field class="full-width">
       <input matInput
              type="number"
@@ -28,7 +29,58 @@
 </div>
 
 <!--TABLE FOR DOCTOR-->
-<mat-card *ngIf="getUserRole() === 'Doctor'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+
+  <mat-card *ngIf="getUserRole() === 'Doctor'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+  <mat-card-content class="p-0">
+    <ngx-datatable class="material ml-0 mr-0"
+                   [rows]="pacientsQuestionaries"
+                   [columnMode]="'force'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [scrollbarH]="true"
+                   [limit]="10"
+                   [rowHeight]="50">
+      <ngx-datatable-column name="Ф.И.О. Пациента" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.fullname }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Дата заполнения" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.date | date: 'medium' }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Температура" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.temperature }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Самочувствие" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.comments }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Головная боль" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.headache }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Затруднённое дыхание" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.obstructedBreathing }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Усталость" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.tiredness }}
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+<!--<mat-card *ngIf="getUserRole() === 'Doctor'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
   <mat-card-content class="p-0">
     <ngx-datatable class="material ml-0 mr-0"
                    [rows]="items"
@@ -61,8 +113,7 @@
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
-
-
+  -->
 <!--TABLE FOR PATIENT-->
 <mat-card *ngIf="getUserRole() === 'User'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
   <mat-card-content class="p-0">
@@ -87,6 +138,21 @@
       <ngx-datatable-column name="Самочувствие" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.comments }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Головная боль" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.headache }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Затруднённое дыхание" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.tiredness }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Усталость" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.obstructedbreathing }}
         </ng-template>
       </ngx-datatable-column>
 

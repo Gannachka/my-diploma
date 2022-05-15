@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ChatService } from './chat.service';
-import { Guid } from 'guid-typescript';
 import { LocalStoreService } from '../../shared/services/local-store.service';
+import localeRu from '@angular/common/locales/ru';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeRu);
 
 @Component({
   selector: 'app-root',
@@ -11,11 +14,11 @@ import { LocalStoreService } from '../../shared/services/local-store.service';
   styleUrls: ['./app-chats.component.css']
 })
 export class AppChatsComponent implements OnInit {
-
+  searchParameter: string = '';
   loggedInUser = this.ls.getItem('EGRET_USER');
   users: any;
+  allUsers: any;
   chatUser: any;
-
   messages: any[] = [];
   displayMessages: any[] = []
   message: string
@@ -42,10 +45,11 @@ export class AppChatsComponent implements OnInit {
     this.messageService.getAll().subscribe(
       (user: any) => {
         if (user) {
-          this.users = user.filter(x => x.id !== this.loggedInUser.id);
+          this.users = user.filter(x => x.id !== this.loggedInUser.id); 
           this.users.forEach(item => {
             item['isActive'] = false;
           })
+          this.allUsers = this.users;
           this.makeItOnline();
         }
       },
@@ -101,7 +105,7 @@ export class AppChatsComponent implements OnInit {
       });
       var user = this.users.find(x => x.id == this.chatUser.id);
       user['isActive'] = true;
-      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
+      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.id) || (x.receiver === this.chatUser.id && x.sender === this.loggedInUser.id));
     })
   }
 
@@ -109,13 +113,13 @@ export class AppChatsComponent implements OnInit {
     if (this.message != '' && this.message.trim() != '') {
       var msg = {
         sender: this.loggedInUser.id,
-        receiver: this.chatUser.userId,
+        receiver: this.chatUser.id,
         messageDate: new Date(),
         type: 'sent',
         content: this.message
       };
       this.messages.push(msg);
-      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
+      this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.id) || (x.receiver === this.chatUser.id && x.sender === this.loggedInUser.id));
 
       this.hubConnection.invoke('SendMessageToUser', msg)
         .then(() => console.log('Message to user Sent Successfully'))
@@ -130,19 +134,25 @@ export class AppChatsComponent implements OnInit {
     });
     user['isActive'] = true;
     this.chatUser = user;
-    this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.userId) || (x.receiver === this.chatUser.userId && x.sender === this.loggedInUser.id));
+    this.displayMessages = this.messages.filter(x => (x.receiver === this.loggedInUser.id && x.sender === this.chatUser.id) || (x.receiver === this.chatUser.id && x.sender === this.loggedInUser.id));
   }
 
   makeItOnline() {
     if (this.connectedUsers && this.users) {
       this.connectedUsers.forEach(item => {
-        var u = this.users.find(x => x.userName == item.username);
+        var u = this.users.find(x => x.id == item.userId);
         if (u) {
           u.isOnline = true;
         }
       })
     }
   }
+
+  searchReceivers() {
+    this.users = this.allUsers.filter(u => u.fullName.includes(this.searchParameter));
+    this.makeItOnline();
+  }
+
   deleteMessage(message, deleteType, isSender) {
     let deleteMessage = {
       'deleteType': deleteType,

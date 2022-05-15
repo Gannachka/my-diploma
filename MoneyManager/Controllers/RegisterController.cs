@@ -9,6 +9,8 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+
+    [Authorize]
     public class RegisterController : BaseApiController
     {
         private readonly IUserService userService;
@@ -20,7 +22,6 @@
             this.pacientsService = pacientsService;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> RegisterUser(UserRegistrationModelDTO registrationModel)
         {

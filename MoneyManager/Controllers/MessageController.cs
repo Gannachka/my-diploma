@@ -1,10 +1,12 @@
-﻿using Application.Services.ChatService;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
-
-namespace MoneyManager.Controllers
+﻿namespace MoneyManager.Controllers
 {
+    using Application.Services.ChatService;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
+
+    [Authorize]
     public class MessageController : BaseApiController
     {
         private readonly IMessageService messageService;

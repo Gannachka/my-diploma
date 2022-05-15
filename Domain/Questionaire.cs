@@ -19,6 +19,18 @@ namespace Domain
         public double Temperature { get; set; }
 
         [Required]
+        [Column("Headache")]
+        public bool Headache { get; set; }
+
+        [Required]
+        [Column("Tiredness")]
+        public bool Tiredness { get; set; }
+        
+        [Required]
+        [Column("ObstructedBreathing")]
+        public bool ObstructedBreathing { get; set; }
+
+        [Required]
         [Column("Comments")]
         public string Comments { get; set; }
 

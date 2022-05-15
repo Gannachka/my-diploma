@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,15 +11,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedModule } from '../../shared/shared.module'
 import { AppChatsComponent } from './app-chats.component';
 import { ChatsRoutes } from './app-chats.routing';
-//import { ChatLeftSidenavComponent } from './chat-left-sidenav/chat-left-sidenav.component';
-//import { ChatContentsComponent } from './chat-contents/chat-contents.component';
 import { ChatService } from './chat.service';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SharedPipesModule } from 'app/shared/pipes/shared-pipes.module';
-import { AppComponent } from '../../app.component';
 
 @NgModule({
   imports: [
@@ -39,6 +35,6 @@ import { AppComponent } from '../../app.component';
     RouterModule.forChild(ChatsRoutes)
   ],
   declarations: [AppChatsComponent],
-  providers: [ ChatService ]
+  providers: [ChatService, { provide: LOCALE_ID, useValue: "ru" } ]
 })
 export class AppChatsModule {}

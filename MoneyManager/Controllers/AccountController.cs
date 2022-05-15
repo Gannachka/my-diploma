@@ -1,30 +1,29 @@
-﻿using Application.Services.DoctorService;
+﻿using Application.DTOs.ChatDTO;
+using Application.Services.ChatService.ReceiverService;
 using Application.Services.LoginService;
-using Application.Services.PacientService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MoneyManager.Hubs;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MoneyManager.Controllers
 {
-
+    [Authorize]
     public class AccountController : BaseApiController
     {
-
         private readonly IUserService userService;
-        private readonly IDoctorService doctorService;
-        private readonly IPacientsService pacientsService;
+        private readonly IReceiverService receiverService;
 
-        public AccountController(IDoctorService doctorService, IUserService userService, IPacientsService pacientsService)
+        public AccountController(IUserService userService, IReceiverService receiverService)
         {
             this.userService = userService;
-            this.doctorService = doctorService;
-            this.pacientsService = pacientsService;
+            this.receiverService = receiverService;
         }
-
-        [Authorize]
+ 
         [HttpGet]
         public async Task<IActionResult> GetReciverUsers()
         {
@@ -34,26 +33,27 @@ namespace MoneyManager.Controllers
                 _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value, out int id);
                 var role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
 
+                IEnumerable<MessegeReceiversSendersDTO> result = new List<MessegeReceiversSendersDTO>();
+
                 if (role == "Doctor")
                 {
-                    return Ok(await pacientsService.GetDoctorPacients(await userService.GetDoctorIdByUserId(id)));
+                    var pacients = await receiverService.GetPacientsForDoctor(await userService.GetDoctorIdByUserId(id));
+                    var admins = await receiverService.GetAdminsForDoctor(await userService.GetDoctorIdByUserId(id));
+                    result = pacients.Union(admins);
+                }
+                else if (role == "Admin")
+                {
+                    result = await receiverService.GetDoctorsForAdmin(await userService.GetAdminIdByUserId(id));
 
                 }
-                if (role == "Admin")
+                else if (role == "User")
                 {
-                    return Ok(await doctorService.GetAdminDoctors(await userService.GetAdminIdByUserId(id)));
-
-                }
-                if (role == "User")
-                {
-                    return Ok(await doctorService.GetPacientDoctors(await userService.GetPacientIdByUserId(id)));
-
+                    result = await receiverService.GetDoctorsForPacient(await userService.GetPacientIdByUserId(id));
                 }
 
-                return BadRequest(new
-                {
-                    Message = "User can't be found"
-                });
+                result = receiverService.SetOnlineStatus(result, ChatHub.Users);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

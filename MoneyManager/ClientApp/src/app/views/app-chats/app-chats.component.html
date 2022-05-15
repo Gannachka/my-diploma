@@ -13,15 +13,14 @@
                 </div>
                 <div class="user_info">
                   <span>{{loggedInUser.displayName}}</span>
-                  <!--<p>{{loggedInUser.email}}</p>-->
                 </div>
               </div>
             </li>
           </ul>
           <div class="input-group">
-            <input type="text" placeholder="Search..." name="" class="form-control search">
+            <input type="text" placeholder="Search..." name="" class="form-control search" [(ngModel)]="searchParameter">
             <div class="input-group-prepend">
-              <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+              <button class="input-group-text search_btn" (click)="searchReceivers()"><i class="fas fa-search"></i></button>
             </div>
           </div>
         </div>
@@ -101,9 +100,6 @@
         </div>
         <div class="card-footer">
           <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-            </div>
             <textarea name="" [(ngModel)]="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
             <div class="input-group-append" (click)="SendDirectMessage()">
               <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>

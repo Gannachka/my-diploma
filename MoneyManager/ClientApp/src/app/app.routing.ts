@@ -37,13 +37,17 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/cruds/cruds.module').then(m => m.CrudsModule)
       },
       {
+        path: 'pacients',
+        loadChildren: () => import('./views/crud-pacients/crud-pacients.module').then(m => m.CrudPacientsModule)
+      },
+      {
         path: 'chart',
         loadChildren: () => import('./views/charts/charts.module').then(m => m.AppChartsModule)
       },
       {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),
-        data: { title: 'Chat', breadcrumb: 'CHAT' }
+        data: { title: 'Чат', breadcrumb: 'CHAT' }
       },
       {
         path: 'profile',

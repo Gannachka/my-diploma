@@ -102,6 +102,7 @@
                     .Include(x => x.Role)
                     .Include(x => x.Doctor)
                     .Include(x => x.Pacient)
+                    .Include(x => x.Admin)
                     .SingleOrDefaultAsync(x => x.Email == email && x.Password == password));
 
                 if (user != null && user.Role != "Admin" && user.Role != "Doctor")
@@ -125,6 +126,7 @@
                     .Include(x => x.Role)
                     .Include(x => x.Doctor)
                     .Include(x => x.Pacient)
+                    .Include(x => x.Admin)
                     .SingleOrDefaultAsync(x => x.UserId == id));
 
                 return user;

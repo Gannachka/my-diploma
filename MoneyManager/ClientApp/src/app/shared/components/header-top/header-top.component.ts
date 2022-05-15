@@ -36,18 +36,7 @@ export class HeaderTopComponent implements OnInit, OnDestroy {
       let limit = 5
       res = res.filter(item => item.type !== 'icon' && item.type !== 'separator');
       res = res.slice(0, limit);
-      res = res.filter(item => !(this.getUserRole() === 'Admin' && item.name === 'CALENDAR'))
-      //if(res.length <= limit) {
-      //  return this.menuItems = mainItems
-      //}
-      //let subItems:any[] = res.slice(limit, res.length - 1)
-      //mainItems.push({
-      //  name: 'More',
-      //  type: 'dropDown',
-      //  tooltip: 'More',
-      //  icon: 'more_horiz',
-      //  sub: subItems
-      //})
+      res = res.filter(item => !((this.getUserRole() === 'Admin' && item.name === 'PACIENTS') || (this.getUserRole() === 'User' && item.name === 'PACIENTS')))
       this.menuItems = res;
     })
   }

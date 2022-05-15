@@ -12,7 +12,7 @@
         public UserProfile()
         {
             CreateMap<User, LoginDTO>()
-                .ForMember(res => res.DisplayName, src => src.MapFrom(x => x.PacientId.HasValue ? x.Pacient.FullName : x.Doctor.FullName))
+                .ForMember(res => res.DisplayName, src => src.MapFrom(x => x.PacientId.HasValue ? x.Pacient.FullName : x.DoctorId.HasValue ? x.Doctor.FullName : x.Admin.Institution))
                 .ForMember(res => res.Role, src => src.MapFrom(x => x.Role.Description))
                 .ForMember(res => res.Id, src => src.MapFrom(x => x.UserId));
 
@@ -50,10 +50,6 @@
                .ForMember(res => res.Age, src => src.MapFrom(x => x.Pacient.Age))
                .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId));
 
-            CreateMap<User, MessegeRecipientsSendersDTO>()
-              .ForMember(res => res.FullName, src => src.MapFrom(x => x.Pacient.FullName))
-              .ForMember(res => res.Id, src => src.MapFrom(x => x.UserId));
-
             CreateMap<User, DoctorDTO>()
                .ForMember(res => res.FullName, src => src.MapFrom(x => x.Doctor.FullName))
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
@@ -71,7 +67,19 @@
             CreateMap<QuestionarityDTO, Questionaire>()
                 .ForMember(res => res.Comments, src => src.MapFrom(x => x.Comments))
                 .ForMember(res => res.Date, src => src.MapFrom(x => x.QDate))
-                .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Temperature));
+                .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Temperature))
+                .ForMember(res => res.Headache, src => src.MapFrom(x=>x.Headache))
+                .ForMember(res => res.ObstructedBreathing, src => src.MapFrom(x=>x.ObstructedBreathing))
+                .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Tiredness));
+
+            CreateMap< Questionaire, PacientsQuestionarityDTO>()
+              .ForMember(res => res.Fullname, src => src.MapFrom(x=>x.Pacient.FullName))
+              .ForMember(res => res.Comments, src => src.MapFrom(x => x.Comments))
+              .ForMember(res => res.QDate, src => src.MapFrom(x => x.Date))
+              .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Temperature))
+              .ForMember(res => res.Headache, src => src.MapFrom(x => x.Headache))
+              .ForMember(res => res.ObstructedBreathing, src => src.MapFrom(x => x.ObstructedBreathing))
+              .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Tiredness));
 
             CreateMap<MessageDTO, Message>()
                 .ForMember(res => res.SenderId, src => src.MapFrom(x => x.Sender))

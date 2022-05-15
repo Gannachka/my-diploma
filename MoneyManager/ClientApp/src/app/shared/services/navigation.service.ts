@@ -64,9 +64,9 @@ export class NavigationService {
       state: 'inbox'
     },
     {
-      name: 'CHAT',
+      name: 'Чат',
       type: 'link',
-      tooltip: 'Chat',
+      tooltip: 'Чат',
       icon: 'chat',
       state: 'chat'
     },
@@ -232,7 +232,7 @@ export class NavigationService {
     {
       name: 'OVERVIEW',
       type: 'link',
-      tooltip: 'Overview',
+      tooltip: 'Главная',
       icon: 'dashboard',
       state: 'mainpage'
     }, 
@@ -240,10 +240,19 @@ export class NavigationService {
     {
       name: 'CHAT',
       type: 'link',
-      tooltip: 'Chat',
+      tooltip: 'Чат',
       icon: 'chat',
       state: 'chat'
-    },  
+    },
+    {
+      name: 'PACIENTS',
+      type: 'link',
+      tooltip: 'Пациенты',
+      icon: '',
+      state: 'pacients'
+    },
+
+
    
   ];
 

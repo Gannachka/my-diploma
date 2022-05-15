@@ -2,6 +2,7 @@ using Application.Profiles;
 using Application.Services;
 using Application.Services.AppointmentService;
 using Application.Services.ChatService;
+using Application.Services.ChatService.ReceiverService;
 using Application.Services.DoctorService;
 using Application.Services.LoginService;
 using Application.Services.PacientService;
@@ -81,6 +82,7 @@ namespace MoneyManager
             services.AddTransient<IQuestionaryService, QuestionaryService>();
             services.AddTransient<IDoctorService, DoctorService>();
             services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IReceiverService, ReceiverService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

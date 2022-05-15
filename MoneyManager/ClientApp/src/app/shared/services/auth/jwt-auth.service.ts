@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { map, catchError, delay } from "rxjs/operators";
 import { User } from "../../models/user.model";
 import { of, BehaviorSubject, throwError } from "rxjs";
-import { environment } from "environments/environment";
 
 @Injectable({
   providedIn: "root",

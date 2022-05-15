@@ -43,6 +43,9 @@
     <None Remove="ClientApp\src\app\shared\services\registration.service.ts" />
     <None Remove="ClientApp\src\app\views\app-chats\MessageDTO.ts" />
     <None Remove="ClientApp\src\app\views\charts\charts.service.ts" />
+    <None Remove="ClientApp\src\app\views\crud-pacients\crud-pacients.module.ts" />
+    <None Remove="ClientApp\src\app\views\crud-pacients\crud-pacients.routing.ts" />
+    <None Remove="ClientApp\src\app\views\crud-pacients\crud-pacients.service.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\doctors-table-popup\doctors-table-popup.component.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
@@ -60,9 +63,16 @@
     <TypeScriptCompile Include="ClientApp\src\app\shared\services\registration.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\app-chats\MessageDTO.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\charts\charts.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\crud-pacients\crud-pacients.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\crud-pacients\crud-pacients.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\crud-pacients\crud-pacients.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\doctors-table-popup\doctors-table-popup.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\shared\components\Новая папка\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

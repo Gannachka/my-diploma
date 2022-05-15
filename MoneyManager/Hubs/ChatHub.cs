@@ -16,14 +16,7 @@ namespace MoneyManager.Hubs
             this.messageService = messageService;
         }
 
-        static IList<UserConnection> Users = new List<UserConnection>();
-
-        public class UserConnection
-        {
-            public int UserId { get; set; }
-            public string ConnectionId { get; set; }
-            public string FullName { get; set; }
-        }
+        public static IList<UserConnection> Users = new List<UserConnection>();
 
         public Task SendMessageToUser(MessageDTO message)
         {
@@ -45,7 +38,7 @@ namespace MoneyManager.Hubs
             var existingUser = Users.FirstOrDefault(x => x.UserId == id);
             var indexExistingUser = Users.IndexOf(existingUser);
 
-            UserConnection user = new UserConnection
+            UserConnection user = new()
             {
                 UserId = id,
                 ConnectionId = Context.ConnectionId,

@@ -54,7 +54,7 @@ import { DoctorsTablePopupComponent } from './crud-ngx-table/doctors-table-popup
     MatSelectModule,
     FormsModule
   ],
-  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, TransactionCategoryComponent, AppointmentTablePopupComponent, PacientsTablePopupComponent, DoctorsTablePopupComponent],
+  declarations: [CrudNgxTableComponent, NgxTablePopupComponent,  AppointmentTablePopupComponent, DoctorsTablePopupComponent],
   providers: [CrudService, ColorPickerService],
   // entryComponents: [NgxTablePopupComponent]
 })

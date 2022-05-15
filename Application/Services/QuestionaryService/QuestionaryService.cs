@@ -26,6 +26,14 @@ namespace Application.Services.QuestionaryService
             return await GetQuestionaires(id);
         }
 
+        public async Task<List<Questionaire>> GetPacientsQuestionaires(int id)
+        {
+            return await context.Questionaire
+                .Include(x => x.Pacient)
+                .Where(x => x.Pacient.DoctorId == id)
+                .ToListAsync();
+        }
+
         public async Task<List<Questionaire>> GetQuestionaires(int id)
         {
             return await context.Questionaire.Where(x => x.PacientId == id).ToListAsync();
