@@ -59,7 +59,10 @@ export class AppointmentTablePopupComponent implements OnInit, OnDestroy {
     this.itemForm = this.fb.group({
       temperature: ['', [Validators.required, Validators.min(0)]],
       qDate: ['', Validators.required],
-      comments: ['', Validators.required]
+      comments: [''],
+      headache: [false, Validators.required],
+      tiredness: [false, Validators.required],
+      obstructedBreathing: [false, Validators.required]
     });
   }
 

@@ -3,10 +3,8 @@ using AutoMapper;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services.QuestionaryService
@@ -26,11 +24,21 @@ namespace Application.Services.QuestionaryService
             return await GetQuestionaires(id);
         }
 
-        public async Task<List<Questionaire>> GetPacientsQuestionaires(int id)
+        public async Task<List<PacientsQuestionarityDTO>> GetPacientsQuestionaires(int id)
         {
             return await context.Questionaire
                 .Include(x => x.Pacient)
                 .Where(x => x.Pacient.DoctorId == id)
+                .Select(x=>new PacientsQuestionarityDTO
+                {
+                    Fullname = x.Pacient.FullName,
+                    Comments =x.Comments,
+                    Temperature = x.Temperature,
+                    QDate = x.Date,
+                    Headache = x.Headache,
+                    ObstructedBreathing = x.ObstructedBreathing,
+                    Tiredness = x.Tiredness
+                })
                 .ToListAsync();
         }
 

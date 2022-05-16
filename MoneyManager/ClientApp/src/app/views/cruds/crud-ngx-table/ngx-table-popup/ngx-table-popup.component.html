@@ -7,7 +7,7 @@
                  type="text"
                  name="pill"
                  [formControl]="itemForm.controls['pill']"
-                 placeholder="Pill">
+                 placeholder="Название препарата">
         </mat-form-field>
       </div>
 
@@ -27,7 +27,7 @@
                  type="datetime-local"
                  name="endDate"
                  [formControl]="itemForm.controls['endDate']"
-                 placeholder="End Date">
+                 placeholder="Конец приёма">
         </mat-form-field>
       </div>
 
@@ -37,14 +37,14 @@
                  type="text"
                  name="app"
                  [formControl]="itemForm.controls['app']"
-                 placeholder="Appointments">
+                 placeholder="Назначение">
         </mat-form-field>
       </div>
 
       <div fxFlex="100" class="mt-16">
-        <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"SAVE" | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"Добавить" | translate }}</button>
         <span fxFlex></span>
-        <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Назад</button>
       </div>
     </div>
   </form>

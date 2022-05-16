@@ -1,5 +1,6 @@
 ﻿using Application.Services.LoginService;
 using Application.Services.QuestionaryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Controllers
 {
+    [Authorize]
     public class PacientsQuestionaryController : BaseApiController
     {
         private readonly IQuestionaryService questionaryService;
@@ -27,7 +29,7 @@ namespace MoneyManager.Controllers
 
                 if (id > 0)
                 {
-                    return Ok(await questionaryService.GetPacientsQuestionaires(id));
+                    return Ok(await questionaryService.GetPacientsQuestionaires(await userService.GetDoctorIdByUserId(id)));
                 }
 
                 return BadRequest(new

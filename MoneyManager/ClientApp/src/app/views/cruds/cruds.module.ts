@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,13 +30,18 @@ import { ColorPickerService } from 'ngx-color-picker';
 import { AppointmentTablePopupComponent } from './crud-ngx-table/appointment-table-popup/appointment-table-popup.component';
 import { PacientsTablePopupComponent } from './crud-ngx-table/pacients-table-popup/pacients-table-popup.component';
 import { DoctorsTablePopupComponent } from './crud-ngx-table/doctors-table-popup/doctors-table-popup.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    NgxDatatableModule,
+    NgxDatatableModule,    
     MatInputModule,
     MatIconModule,
     MatCardModule,
@@ -48,6 +53,12 @@ import { DoctorsTablePopupComponent } from './crud-ngx-table/doctors-table-popup
     MatDialogModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatRadioModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatExpansionModule,
     TranslateModule,
     SharedModule,
     RouterModule.forChild(CrudsRoutes),
@@ -55,7 +66,7 @@ import { DoctorsTablePopupComponent } from './crud-ngx-table/doctors-table-popup
     FormsModule
   ],
   declarations: [CrudNgxTableComponent, NgxTablePopupComponent,  AppointmentTablePopupComponent, DoctorsTablePopupComponent],
-  providers: [CrudService, ColorPickerService],
+  providers: [CrudService, ColorPickerService, { provide: LOCALE_ID, useValue: "ru" } ],
   // entryComponents: [NgxTablePopupComponent]
 })
 export class CrudsModule { }

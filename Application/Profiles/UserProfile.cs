@@ -70,9 +70,9 @@
                 .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Temperature))
                 .ForMember(res => res.Headache, src => src.MapFrom(x=>x.Headache))
                 .ForMember(res => res.ObstructedBreathing, src => src.MapFrom(x=>x.ObstructedBreathing))
-                .ForMember(res => res.Temperature, src => src.MapFrom(x => x.Tiredness));
+                .ForMember(res => res.Tiredness, src => src.MapFrom(x => x.Tiredness));
 
-            CreateMap< Questionaire, PacientsQuestionarityDTO>()
+            CreateMap<Questionaire, PacientsQuestionarityDTO>()
               .ForMember(res => res.Fullname, src => src.MapFrom(x=>x.Pacient.FullName))
               .ForMember(res => res.Comments, src => src.MapFrom(x => x.Comments))
               .ForMember(res => res.QDate, src => src.MapFrom(x => x.Date))

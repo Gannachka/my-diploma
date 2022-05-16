@@ -12,7 +12,7 @@ namespace Application.Services.QuestionaryService
     {
         Task<List<Questionaire>> GetQuestionaires(int id);
 
-        Task<List<Questionaire>> GetPacientsQuestionaires(int id);
+        Task<List<PacientsQuestionarityDTO>> GetPacientsQuestionaires(int id);
 
 
         Task<List<Questionaire>> CreateQuestionairy(int id, QuestionarityDTO questionarity);

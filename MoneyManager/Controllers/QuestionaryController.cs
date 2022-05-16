@@ -30,8 +30,7 @@
 
                 if (id > 0)
                 {
-                    return Ok(await questionaryService.GetQuestionaires(id));
-
+                    return Ok(await questionaryService.GetQuestionaires(await userService.GetPacientIdByUserId(id)));
                 }
 
                 return BadRequest(new

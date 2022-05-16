@@ -75,7 +75,7 @@ export class CrudPacientsComponent implements OnInit, OnDestroy  {
       });
   }
   openPopUp(data: any = {}, isNew?) {
-    const title = 'Add new appointment';
+    const title = 'Добавить лекарство';
     const dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
       width: '720px',
       disableClose: true,
@@ -93,11 +93,11 @@ export class CrudPacientsComponent implements OnInit, OnDestroy  {
               data => {
                 //this.items = data;
                 this.loader.close();
-                this.snack.open('Appointment Added!', 'OK', { duration: 4000 })
+                this.snack.open('Лекарство добавлено!', '', { duration: 4000 })
               },
               error => {
                 this.loader.close();
-                this.snack.open(error.error.message, 'OK', { duration: 4000 })
+                this.snack.open(error.error.message, '', { duration: 4000 })
               });
         } else {
           this.crudService.updateItem(data.id, res)

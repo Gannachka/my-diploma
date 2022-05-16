@@ -15,6 +15,10 @@ import { LocalStoreService } from '../../../shared/services/local-store.service'
 import { AppointmentTablePopupComponent } from './appointment-table-popup/appointment-table-popup.component';
 import { PacientsTablePopupComponent } from './pacients-table-popup/pacients-table-popup.component';
 import { DoctorsTablePopupComponent } from './doctors-table-popup/doctors-table-popup.component';
+import localeRu from '@angular/common/locales/ru';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeRu);
 
 @Component({
   selector: 'app-crud-ngx-table',
@@ -240,7 +244,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
               data => {
                 //this.items = data;
                 this.loader.close();
-                this.snack.open('Appointment Added!', 'OK', { duration: 4000 })
+                this.snack.open('Препарат добавлен!', 'OK', { duration: 4000 })
               },
               error => {
                 this.loader.close();

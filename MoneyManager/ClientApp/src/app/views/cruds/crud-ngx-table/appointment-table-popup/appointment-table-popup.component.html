@@ -8,25 +8,38 @@
                  step="0.01"
                  name="temperature"
                  [formControl]="itemForm.controls['temperature']"
-                 placeholder="Temperature">
+                 placeholder="Температура">
         </mat-form-field>
       </div>
 
-      <div fxFlex="50" class="pr-16">
+      <div fxFlex="100" class="pr-16">
         <mat-form-field class="full-width">
           <input matInput
                  type="datetime-local"
                  name="qDate"
                  [formControl]="itemForm.controls['qDate']"
-                 placeholder="Date and time">
+                 placeholder="Дата и время измерения">
         </mat-form-field>
+      </div>
+
+      <div fxFlex="100" class="pr-16">
+
+        <mat-slide-toggle [formControl]="itemForm.controls['headache']">Головная боль</mat-slide-toggle>
+      </div>
+
+      <div fxFlex="100" class="pr-16">
+        <mat-slide-toggle [formControl]="itemForm.controls['obstructedBreathing']">Затруднённое дыхание</mat-slide-toggle>
+      </div>
+
+      <div fxFlex="100" class="pr-16">
+        <mat-slide-toggle [formControl]="itemForm.controls['tiredness']">Усталость</mat-slide-toggle>
       </div>
 
       <div fxFlex="100" class="pr-16">
         <mat-form-field class="full-width">
           <textarea matInput
                     formControlName="comments"
-                    placeholder="Comments"
+                    placeholder="Комментарии"
                     max-rows="4">
             </textarea>
         </mat-form-field>
@@ -35,7 +48,7 @@
       <div fxFlex="100" class="mt-16">
         <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"SAVE" | translate }}</button>
         <span fxFlex></span>
-        <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Отмена</button>
       </div>
     </div>
   </form>
