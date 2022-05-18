@@ -48,6 +48,7 @@
                .ForMember(res => res.FullName, src => src.MapFrom(x => x.Pacient.FullName))
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
                .ForMember(res => res.Age, src => src.MapFrom(x => x.Pacient.Age))
+               .ForMember(res => res.Diagnosis, src => src.MapFrom(x => x.Pacient.Diagnosis))
                .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId));
 
             CreateMap<User, DoctorDTO>()

@@ -22,9 +22,11 @@ import { SharedModule } from "../../shared/shared.module";
 import { TransactionCategoryComponent } from "../cruds/crud-ngx-table/ngx-table-popup/transaction-category-popup/transaction-category-popup.component";
 import { PacientsTablePopupComponent } from "../cruds/crud-ngx-table/pacients-table-popup/pacients-table-popup.component";
 import { CrudService } from "../cruds/crud.service";
+import { InvoiceService } from "../invoice/invoice.service";
 import { CrudPacientsComponent } from "./crud-pacients.component";
 import { CrudPacientsRoutes } from "./crud-pacients.routing";
 import { CrudPacientsService } from "./crud-pacients.service";
+import { PacientsAppointmentPopupComponent } from "./pacients-appoitment-popup/pacients-appoitment-popup.component";
 
 @NgModule({
   imports: [
@@ -49,8 +51,8 @@ import { CrudPacientsService } from "./crud-pacients.service";
     MatSelectModule,
     FormsModule
   ],
-  declarations: [CrudPacientsComponent, TransactionCategoryComponent, PacientsTablePopupComponent],
-  providers: [CrudPacientsService, CrudService, ColorPickerService],
+  declarations: [CrudPacientsComponent, TransactionCategoryComponent, PacientsTablePopupComponent, PacientsAppointmentPopupComponent],
+  providers: [CrudPacientsService, CrudService, ColorPickerService, InvoiceService],
   // entryComponents: [NgxTablePopupComponent]
 })
 export class CrudPacientsModule { }

@@ -48,7 +48,11 @@
     <None Remove="ClientApp\src\app\views\crud-pacients\crud-pacients.service.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\doctors-table-popup\doctors-table-popup.component.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
+    <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\cdk-detail-row.directive.ts" />
     <None Remove="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
+    <None Remove="ClientApp\src\app\views\mattable\mattable.module.ts" />
+    <None Remove="ClientApp\src\app\views\mattable\mattable.routing.ts" />
+    <None Remove="ClientApp\src\app\views\mattable\mattable.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,6 +73,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\doctors-table-popup\doctors-table-popup.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\ngx-table-popup\transaction-category-popup\transaction-category-popup.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\cruds\crud-ngx-table\pacients-table-popup\pacients-table-popup.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

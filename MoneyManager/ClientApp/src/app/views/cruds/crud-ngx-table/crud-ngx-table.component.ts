@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 import { CrudService } from '../crud.service';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppConfirmService } from '../../../shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { NgxTablePopupComponent } from './ngx-table-popup/ngx-table-popup.component';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { egretAnimations } from "../../../shared/animations/egret-animations";
 import { DisplayTransactionModel } from '../../../shared/models/display.transaction.model';
 import { DisplayDoctorModel } from '../../../shared/models/display.doctor.model';
@@ -17,13 +17,31 @@ import { PacientsTablePopupComponent } from './pacients-table-popup/pacients-tab
 import { DoctorsTablePopupComponent } from './doctors-table-popup/doctors-table-popup.component';
 import localeRu from '@angular/common/locales/ru';
 import { registerLocaleData } from '@angular/common';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 
 registerLocaleData(localeRu);
+
 
 @Component({
   selector: 'app-crud-ngx-table',
   templateUrl: './crud-ngx-table.component.html',
-  animations: egretAnimations
+  animations: [
+    trigger('detailExpand', [state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', visibility: 'hidden' })
+      ),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      )
+    ])
+    ]
+    //egretAnimations
 })
 export class CrudNgxTableComponent implements OnInit, OnDestroy {
   public minage;
@@ -37,6 +55,23 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   private dialogRef: MatDialogRef<NgxTablePopupComponent>;
   public events: EgretCalendarEvent[];
   public refresh: Subject<any> = new Subject();
+
+  displayedColumns = ['fullname', 'qDate', 'temperature', 'headache', 'obstructedBreathing', 'tiredness'];
+  /*dataSource = [];*/
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  isExpansionDetailRow = (i: number, row: Object) => {
+    return row.hasOwnProperty('detailRow');
+  };
+  expandedElement: any;
+    dataSource: MatTableDataSource<PacientsQuestionaries>;
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -44,15 +79,18 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
     private calendarService: AppCalendarService,
-    private ls: LocalStoreService
+    private ls: LocalStoreService,
+    private cd: ChangeDetectorRef
   ) {
-  }
+
+}
 
   ngOnInit() {
     if (this.getUserRole() === 'Doctor') {
       this.getItems();
       this.getPacientsQuestionaries();
-  }else if(this.getUserRole() === 'User') {
+      
+    }else if(this.getUserRole() === 'User') {
       this.getAppointments();
       this.getMyQuestionaries();
     } else if (this.getUserRole() === 'Admin') {
@@ -65,9 +103,6 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  search() {
-    this.items = this.items.filter(x => x.age >= this.minage && x.age <= this.maxage);
-  }
 
   getItems() {
     this.getItemSub = this.crudService.getItems()
@@ -117,6 +152,10 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           this.pacientsQuestionaries = data;
+          this.displayedColumns = ['fullname', 'qDate', 'temperature', 'headache', 'obstructedBreathing', 'tiredness'];
+          this.dataSource = new MatTableDataSource<PacientsQuestionaries>(this.pacientsQuestionaries);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         },
         error => {
           this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
@@ -270,3 +309,23 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
     return this.ls.getItem('EGRET_USER').role;
   }
 }
+export interface PacientsQuestionaries {
+  fullname: string;
+  qDate: Date;
+  temperature: number;
+  headache: boolean;
+  obstructedBreathing: boolean;
+  tiredness: boolean;
+  comments: string;
+
+}
+
+
+
+/**
+ * Data source to provide what data should be rendered in the table. The observable provided
+ * in connect should emit exactly the data that should be rendered by the table. If the data is
+ * altered, the observable should emit that new set of data on the stream. In our case here,
+ * we return a stream that contains only one set of data that doesn't change.
+ */
+

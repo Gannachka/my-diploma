@@ -1,9 +1,13 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-@Injectable()
-export class CrudPacientsService {
+@Injectable({
+  providedIn: 'root'
+})
+
+export class InvoiceService {
+
   items: any[];
   constructor(
     private http: HttpClient
@@ -13,11 +17,6 @@ export class CrudPacientsService {
   getItems(): Observable<any> {
     return this.http.get('/api/pacients');
   }
-
-  getApp(): Observable<any> {
-    return this.http.get('/api/appointment');
-  }
-
 
   addPacient(item): Observable<any> {
     return this.http.post('/api/register', item);

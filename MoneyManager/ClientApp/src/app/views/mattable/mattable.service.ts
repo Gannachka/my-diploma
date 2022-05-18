@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 @Injectable()
-export class CrudPacientsService {
+export class MatTableService {
   items: any[];
   constructor(
     private http: HttpClient
@@ -13,11 +13,6 @@ export class CrudPacientsService {
   getItems(): Observable<any> {
     return this.http.get('/api/pacients');
   }
-
-  getApp(): Observable<any> {
-    return this.http.get('/api/appointment');
-  }
-
 
   addPacient(item): Observable<any> {
     return this.http.post('/api/register', item);

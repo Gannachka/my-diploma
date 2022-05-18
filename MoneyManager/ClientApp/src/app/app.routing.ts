@@ -36,10 +36,18 @@ export const rootRouterConfig: Routes = [
         path: 'mainpage',
         loadChildren: () => import('./views/cruds/cruds.module').then(m => m.CrudsModule)
       },
-      {
+      //{
+      //  path: 'pacients',
+      //  loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
+      //},
+          {
         path: 'pacients',
         loadChildren: () => import('./views/crud-pacients/crud-pacients.module').then(m => m.CrudPacientsModule)
       },
+      //{
+      //  path: 'pacients',
+      //  loadChildren: () => import('./views/crud-pacients/crud-pacients.module').then(m => m.CrudPacientsModule)
+      //},
       {
         path: 'chart',
         loadChildren: () => import('./views/charts/charts.module').then(m => m.AppChartsModule)

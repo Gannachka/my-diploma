@@ -9,55 +9,72 @@
 <!--TABLE FOR DOCTOR-->
 
 
-<mat-card *ngIf="getUserRole() === 'Doctor'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
-    <mat-card-content class="p-0">
-      <ngx-datatable class="material ml-0 mr-0"
-                     [rows]="pacientsQuestionaries"
-                     [columnMode]="'force'"
-                     [headerHeight]="50"
-                     [footerHeight]="50"
-                     [scrollbarH]="true"
-                     [limit]="10"
-                     [rowHeight]="50">
-        <ngx-datatable-column name="Ф.И.О. Пациента" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.fullname }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Дата заполнения" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.qDate | date: 'medium' }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Температура" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.temperature > 36.6">{{row?.temperature}}</mat-chip>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Самочувствие" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.comments }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Головная боль" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.headache">{{row?.headache ? 'Да' : 'Нет'}}</mat-chip>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Затруднённое дыхание" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.obstructedBreathing">{{row?.obstructedBreathing ? 'Да' : 'Нет'}}</mat-chip>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Усталость" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.tiredness">{{row?.tiredness ? 'Да' : 'Нет'}}</mat-chip>
-          </ng-template>
-        </ngx-datatable-column>
+<div class="messages-wrap" *ngIf="getUserRole() === 'Doctor'">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+      <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+      <!-- Position Column -->
+      <ng-container matColumnDef="fullname">
+        <mat-header-cell *matHeaderCellDef> Ф.И.О. Пациента </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
+      </ng-container>
 
-      </ngx-datatable>
-    </mat-card-content>
-  </mat-card>
+      <!-- Name Column -->
+      <ng-container matColumnDef="qDate">
+        <mat-header-cell *matHeaderCellDef> Дата заполнения </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.qDate | date: 'medium'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature">
+        <mat-header-cell *matHeaderCellDef> Температура </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.temperature > 36.6">{{element.temperature}}</mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="headache">
+        <mat-header-cell *matHeaderCellDef>at Головная боль </mat-header-cell>
+        <!--<mat-cell *matCellDef="let element"> {{element.headache}} </mat-cell>-->
+        <mat-cell *matCellDef="let element">
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.headache">{{element?.headache ? 'Да' : 'Нет'}}</mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="obstructedBreathing">
+        <mat-header-cell *matHeaderCellDef> Затруднённое дыхание]</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.obstructedBreathing">{{element?.obstructedBreathing ? 'Да' : 'Нет'}}</mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tiredness">
+        <mat-header-cell *matHeaderCellDef> Усталость </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.tiredness">{{element?.tiredness ? 'Да' : 'Нет'}}</mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl">
+      </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+              
+  <ng-template #tpl let-element>
+    <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
+      <p style="background-color: #AED6F1; margin-left: 25px ">Самочувствие</p>
+      <p style="margin-left: 25px">{{element.comments}} </p>
+    </div>
+  </ng-template>
+</div>
 
   <!--TABLE FOR PATIENT-->
   <mat-card *ngIf="getUserRole() === 'User'" class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
@@ -174,7 +191,7 @@
         <!--добавить disabled or enabled-->
         <ngx-datatable-column name="Статус" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            
+
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

@@ -35,6 +35,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MattableComponent } from '../mattable/mattable.component';
+import { MatTableService } from '../mattable/mattable.service';
+import { MatTableModule } from '@angular/material/table';
+import { A11yModule } from '@angular/cdk/a11y';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { CdkTableModule } from '@angular/cdk/table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PortalModule } from '@angular/cdk/portal';
+import { MatSortModule } from '@angular/material/sort';
+import { CdkDetailRowDirective } from "./crud-ngx-table/cdk-detail-row.directive";
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -63,10 +75,19 @@ import { MatExpansionModule } from '@angular/material/expansion';
     SharedModule,
     RouterModule.forChild(CrudsRoutes),
     MatSelectModule,
-    FormsModule
+    MatSortModule,
+    FormsModule,
+    MatTableModule,
+    A11yModule,
+    CdkStepperModule,
+    CdkTableModule,
+    CdkTreeModule,
+    PortalModule,
+    ScrollingModule,
+    MatNativeDateModule
   ],
-  declarations: [CrudNgxTableComponent, NgxTablePopupComponent,  AppointmentTablePopupComponent, DoctorsTablePopupComponent],
-  providers: [CrudService, ColorPickerService, { provide: LOCALE_ID, useValue: "ru" } ],
+  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, CdkDetailRowDirective, AppointmentTablePopupComponent, DoctorsTablePopupComponent, MattableComponent],
+  providers: [CrudService, MatTableService, ColorPickerService,  { provide: LOCALE_ID, useValue: "ru" } ],
   // entryComponents: [NgxTablePopupComponent]
 })
 export class CrudsModule { }

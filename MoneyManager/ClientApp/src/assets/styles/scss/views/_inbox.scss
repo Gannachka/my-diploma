@@ -40,29 +40,47 @@
 .messages-wrap {
   padding: .333rem;
   min-height: 800px;
-  .mat-expansion-panel-header-title {
-    align-items: center;
-  }
-  .mat-expansion-panel-header-description {
-    align-items: center;
-  }
 
-  .mail-checkbox.mat-checkbox {
-    position: relative;
-    width: 20px;
-    height: 22px;
-    overflow: hidden;
-    margin-right: 8px;
-    .mat-checkbox-layout {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  }
   .inbox-face {
     height: 36px;
     width: 36px;
     border-radius: 50%;
+  }
+
+  mat-header-cell {
+    position: sticky;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 800px;
+    min-width: 300px;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .element-row {
+    position: relative;
+  }
+
+  .element-row:not(.expanded) {
+    cursor: pointer;
+  }
+
+  .element-row:not(.expanded):hover {
+    background: #f5f5f5;
+  }
+
+  .element-row.expanded {
+    border-bottom-color: transparent;
+  }
+
+  .mat-row {
+    align-items: center;
   }
 }
 
