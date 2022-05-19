@@ -4,6 +4,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { CrudPacientsService } from '../crud-pacients.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pacients-appointment-table-popup',
@@ -14,9 +16,13 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
   public getCategoriesSub: Subscription;
   public updateCategoriesSub: Subscription;
   public removeCategoriesSub: Subscription;
+  public getItemSub: Subscription;
   public getCurrenciesSub: Subscription;
+  private crudPacientsService: CrudPacientsService;
+  public appointments: any[];
   public itemForm: FormGroup;
   public selectedValue: string;
+  private snack: MatSnackBar;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<PacientsAppointmentPopupComponent>,
@@ -33,6 +39,17 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildItemForm(this.data.payload);
+  }
+
+  getPacientsAppointments() {
+    this.getItemSub = this.crudPacientsService.getApp()
+      .subscribe(
+        data => {
+          this.appointments = data;
+        },
+        error => {
+          this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
+        });
   }
 
   ngOnDestroy() {

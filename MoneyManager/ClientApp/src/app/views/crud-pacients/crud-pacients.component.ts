@@ -119,7 +119,7 @@ export class CrudPacientsComponent implements OnInit, OnDestroy  {
   openAppoitmentPopUp(data: any = {},) {
     const title = 'Препараты пациента';
     const dialogRef: MatDialogRef<any> = this.dialog.open(PacientsAppointmentPopupComponent, {
-      width: '720px',
+      width: '900px',
       disableClose: true,
       data: { title, payload: data }
     });

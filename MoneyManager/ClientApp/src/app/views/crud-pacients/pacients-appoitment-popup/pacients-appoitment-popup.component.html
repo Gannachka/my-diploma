@@ -1,43 +1,37 @@
 <h1 matDialogTitle>{{data.title}}</h1>
 <form [formGroup]="itemForm" (ngSubmit)="submit()">
+  <ngx-datatable class="material ml-0 mr-0"
+                 [columnMode]="'force'"
+                 [headerHeight]="40"
+                 [rowHeight]="40">
+    <ngx-datatable-column name="Препарат" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row?.age }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Начало приёма" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row?.age }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Конец приёма" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row?.email }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Диагноз" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row?.diagnosis }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Добавить препарат" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-raised-button class="mb-8" color="accent" (click)="openAppoitmentPopUp(row, true)">Добавить препарат</button>
+      </ng-template>
+    </ngx-datatable-column>mat-header-row
+  </ngx-datatable>
+
   <div fxLayout="row wrap" fxLayout.lt-sm="column">
-
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Фамилия Имя Отчество</mat-label>
-      <input matInput
-             formControlName="fullName"
-             type="text"
-             name="fullName"
-             placeholder="" />
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Электронная почта</mat-label>
-      <input matInput
-             formControlName="email"
-             type="email"
-             name="email"
-             placeholder="" />
-    </mat-form-field>
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Возраст</mat-label>
-      <input matInput
-             formControlName="age"
-             type="number"
-             name="age"
-             placeholder="" />
-    </mat-form-field>
-
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Диагноз</mat-label>
-      <input matInput
-             formControlName="diagnosis"
-             type="text"
-             name="diagnosis"
-             placeholder="" />
-    </mat-form-field>
-
-
     <div fxFlex="100" class="mt-16">
       <button mat-raised-button color="primary" [disabled]="itemForm.invalid">{{"Добавить" | translate }}</button>
       <span fxFlex></span>

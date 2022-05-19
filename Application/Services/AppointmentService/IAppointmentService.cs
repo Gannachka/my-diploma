@@ -12,6 +12,8 @@ namespace Application.Services.AppointmentService
     {
         Task<List<Appointment>> GetAppointments(int id);
 
+        Task<List<Appointment>> GetPacientsAppointments(int id);
+
         Task CreateAppointment(AppointmentsDTO appointment);
     }
 }
