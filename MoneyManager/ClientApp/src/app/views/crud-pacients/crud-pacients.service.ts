@@ -14,8 +14,8 @@ export class CrudPacientsService {
     return this.http.get('/api/pacients');
   }
 
-  getApp(): Observable<any> {
-    return this.http.get('/api/appointment');
+  getPacientsAppoitment(item): Observable<any> {
+    return this.http.get('/api/pacientsAppoitment?userId=' + item);
   }
 
 

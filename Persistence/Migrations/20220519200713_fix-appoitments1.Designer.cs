@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CovidHelperContext))]
-    partial class CovidHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20220519200713_fix-appoitments1")]
+    partial class fixappoitments1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,9 +68,15 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("StartDate");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
+
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("PacientId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Appointments");
                 });
@@ -299,7 +307,15 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Pacient");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Doctor", b =>

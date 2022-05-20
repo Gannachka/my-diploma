@@ -29,12 +29,11 @@ namespace Domain
         [Required]
         [Column("Pill")]
         public string Pill { get; set; }
-
         [Required]
-        [Column("UserId")]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+        [Column("PacientId")]
+        [ForeignKey("Pacient")]
+        public int PacientId { get; set; }
 
-        public User User { get; set; }
+        public Pacient Pacient { get; set; }
     }
 }

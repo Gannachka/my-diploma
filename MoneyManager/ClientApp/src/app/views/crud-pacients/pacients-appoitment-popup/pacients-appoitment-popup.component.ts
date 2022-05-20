@@ -6,10 +6,12 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { CrudPacientsService } from '../crud-pacients.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { egretAnimations } from '../../../shared/animations/egret-animations';
 
 @Component({
   selector: 'app-pacients-appointment-table-popup',
-  templateUrl: './pacients-appoitment-popup.component.html'
+  templateUrl: './pacients-appoitment-popup.component.html',
+  animations: egretAnimations
 })
 export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
 
@@ -18,7 +20,6 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
   public removeCategoriesSub: Subscription;
   public getItemSub: Subscription;
   public getCurrenciesSub: Subscription;
-  private crudPacientsService: CrudPacientsService;
   public appointments: any[];
   public itemForm: FormGroup;
   public selectedValue: string;
@@ -28,6 +29,7 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<PacientsAppointmentPopupComponent>,
     private fb: FormBuilder,
     public dialog: MatDialog,
+    private crudPacientsService: CrudPacientsService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
@@ -39,10 +41,11 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildItemForm(this.data.payload);
+    this.getPacientsAppointments(this.data.payload.userId)
   }
 
-  getPacientsAppointments() {
-    this.getItemSub = this.crudPacientsService.getApp()
+  getPacientsAppointments(userId) {
+    this.getItemSub = this.crudPacientsService.getPacientsAppoitment(userId)
       .subscribe(
         data => {
           this.appointments = data;
@@ -72,12 +75,7 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
 
   buildItemForm(item) {
     this.itemForm = this.fb.group({
-      temperature: ['', [Validators.required, Validators.min(0)]],
-      qDate: ['', Validators.required],
-      comments: [''],
-      headache: [false, Validators.required],
-      tiredness: [false, Validators.required],
-      obstructedBreathing: [false, Validators.required]
+      userId: [item.userId, Validators.required],
     });
   }
 

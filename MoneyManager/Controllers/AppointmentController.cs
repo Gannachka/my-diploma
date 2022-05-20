@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.QuestionarityDTO;
 using Application.Services.AppointmentService;
+using Application.Services.LoginService;
 using Application.Services.QuestionaryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,12 @@ namespace MoneyManager.Controllers
     public class AppointmentController:BaseApiController
     {
         private IAppointmentService appointmentService;
+        private readonly IUserService userService;
 
-        public AppointmentController(IAppointmentService appointmentService)
+        public AppointmentController(IAppointmentService appointmentService, IUserService userService)
         {
             this.appointmentService = appointmentService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -30,7 +33,7 @@ namespace MoneyManager.Controllers
 
                 if (id > 0)
                 {
-                    return Ok(await appointmentService.GetAppointments(id));
+                    return Ok(await appointmentService.GetAppointments(await userService.GetPacientIdByUserId(id)));
 
                 }
 
@@ -51,9 +54,11 @@ namespace MoneyManager.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(AppointmentsDTO appointments)
         {
+            _ = int.TryParse(User.FindFirst(x => x.Type == ClaimsIdentity.DefaultNameClaimType).Value,
+                   out int doctorId);
             try
             {
-                await appointmentService.CreateAppointment(appointments);
+                await appointmentService.CreateAppointment(appointments, await userService.GetPacientIdByUserId(appointments.UserId));
                 return StatusCode(200);
             }
             catch (Exception ex)

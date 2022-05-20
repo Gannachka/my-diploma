@@ -1,8 +1,7 @@
 ﻿namespace Application.DTOs.UserDTOs
 {
-    public class DoctorDTO
+    public class DoctorProfileDTO
     {
-        public int DoctorId { get; set; }
         public string FullName { get; set; }
 
         public string PhoneNumber { get; set; }

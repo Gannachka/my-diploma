@@ -53,6 +53,7 @@
     <None Remove="ClientApp\src\app\views\mattable\mattable.module.ts" />
     <None Remove="ClientApp\src\app\views\mattable\mattable.routing.ts" />
     <None Remove="ClientApp\src\app\views\mattable\mattable.service.ts" />
+    <None Remove="ClientApp\src\app\views\profile\profile.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,6 +77,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\views\mattable\mattable.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\views\profile\profile.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

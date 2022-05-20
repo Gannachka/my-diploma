@@ -1,25 +1,25 @@
-﻿using Application.Services.AppointmentService;
+﻿using Application.Services.DoctorService;
 using Application.Services.LoginService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Security.Claims;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MoneyManager.Controllers
 {
     [Authorize]
-    public class PacientsAppoitmentController : BaseApiController
+    public class DoctorProfileController : BaseApiController
     {
-        private IAppointmentService appointmentService;
+        private IDoctorService doctorService;
         private IUserService userService;
 
-        public PacientsAppoitmentController(IAppointmentService appointmentService, IUserService userService)
+        public DoctorProfileController(IDoctorService doctorService, IUserService userService)
         {
-            this.appointmentService = appointmentService;
+            this.doctorService = doctorService;
             this.userService = userService;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetPacientsAppointments(int userId)
         {
@@ -27,7 +27,7 @@ namespace MoneyManager.Controllers
             {
                 if (userId > 0)
                 {
-                    return Ok(await appointmentService.GetAppointments(await userService.GetPacientIdByUserId(userId)));
+                    return Ok(await doctorService.GetDoctorProfile(await userService.GetDoctorIdByUserId(userId)));
 
                 }
 

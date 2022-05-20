@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.ChatDTO;
 using Application.DTOs.UserDTOs;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Application.Services.DoctorService
     public interface IDoctorService
     {
         Task<List<DoctorDTO>> GetDoctors(int id);
+        Task<List<Doctor>> GetDoctorProfile(int id);
 
         Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId);        
     }

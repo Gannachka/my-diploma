@@ -58,12 +58,18 @@
                .ForMember(res => res.WorkExperience, src => src.MapFrom(x => x.Doctor.WorkExperience))
                .ForMember(res => res.DoctorId, src => src.MapFrom(x => x.UserId));
 
+            CreateMap<User, DoctorDTO>()
+                .ForMember(res => res.FullName, src => src.MapFrom(x => x.Doctor.FullName))
+                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
+                .ForMember(res => res.PhoneNumber, src => src.MapFrom(x => x.Doctor.PhoneNumber))
+                .ForMember(res => res.WorkExperience, src => src.MapFrom(x => x.Doctor.WorkExperience));
+
             CreateMap<AppointmentsDTO, Appointment>()
                 .ForMember(res => res.AppointmentDescription, src => src.MapFrom(x => x.App))
                 .ForMember(res => res.Pill, src => src.MapFrom(x => x.Pill))
                 .ForMember(res => res.StartDate, src => src.MapFrom(x => x.StartDate))
                 .ForMember(res => res.EndDate, src => src.MapFrom(x => x.EndDate))
-                .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId));
+                .ForMember(res => res.PacientId, src => src.MapFrom(x => x.UserId));
 
             CreateMap<QuestionarityDTO, Questionaire>()
                 .ForMember(res => res.Comments, src => src.MapFrom(x => x.Comments))

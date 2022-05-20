@@ -36,6 +36,11 @@
             }
         }
 
+        public async Task<List<Doctor>> GetDoctorProfile(int id)
+        {
+            return await context.Doctors.Where(x => x.DoctorId == id).ToListAsync();
+        }
+
         public async Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId)
         {
             try

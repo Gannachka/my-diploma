@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -52,7 +52,7 @@ import { PacientsAppointmentPopupComponent } from "./pacients-appoitment-popup/p
     FormsModule
   ],
   declarations: [CrudPacientsComponent, TransactionCategoryComponent, PacientsTablePopupComponent, PacientsAppointmentPopupComponent],
-  providers: [CrudPacientsService, CrudService, ColorPickerService, InvoiceService],
+  providers: [CrudPacientsService, CrudService, ColorPickerService, InvoiceService, { provide: LOCALE_ID, useValue: "ru" }],
   // entryComponents: [NgxTablePopupComponent]
 })
 export class CrudPacientsModule { }
