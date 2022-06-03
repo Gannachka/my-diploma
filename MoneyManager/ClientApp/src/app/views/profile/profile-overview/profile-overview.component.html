@@ -2,12 +2,12 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
     <!-- Time line -->
     <mat-card class="default">
-      <mat-card-title>Timeline</mat-card-title>
+      <mat-card-title>Последние новости по коронавирусу</mat-card-title>
       <div class="row pt-2">  
         <div class="col-ms-12">
           <div class="card">
             <div class="card-body text-left card-box">
-              <span class="card-text card-news-title display-5 p-3">Treading {{RssData?.rss.channel[0].title[0]}} News</span>
+              <span class="card-text card-news-title display-5 p-3">Treading {{RssData?.rss.channel[0].title[0]}} </span>
               <div *ngFor="let o of RssData?.rss.channel[0].item;">
                 <div class="news-text-contain p-3">
                   <a [href]="sanitize(o.link[0])" class="card-text card-contain d-block">{{o.title[0]}}</a>

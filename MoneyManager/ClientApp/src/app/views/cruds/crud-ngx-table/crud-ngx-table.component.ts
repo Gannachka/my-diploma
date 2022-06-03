@@ -264,46 +264,26 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
       });
   }
 
-  //openPopUp(data: any = {}, isNew?) {
-  //  const title = 'Add new appointment';
-  //  const dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
-  //    width: '720px',
-  //    disableClose: true,
-  //    data: { title, payload: data }
-  //  });
-  //  dialogRef.afterClosed()
-  //    .subscribe(res => {
-  //      if (!res) {
-  //        return;
-  //      }
-  //      this.loader.open();
-  //      if (isNew) {
-  //        this.crudService.addAppointment(res)
-  //          .subscribe(
-  //            data => {
-  //              //this.items = data;
-  //              this.loader.close();
-  //              this.snack.open('Препарат добавлен!', 'OK', { duration: 4000 })
-  //            },
-  //            error => {
-  //              this.loader.close();
-  //              this.snack.open(error.error.message, 'OK', { duration: 4000 })
-  //            });
-  //      } else {
-  //        this.crudService.updateItem(data.id, res)
-  //          .subscribe(
-  //            data => {
-  //              this.items = data;
-  //              this.loader.close();
-  //              this.snack.open('Transaction Updated!', 'OK', { duration: 4000 });
-  //            },
-  //            error => {
-  //              this.loader.close();
-  //              this.snack.open(error.error.message, 'OK', { duration: 4000 })
-  //            });
-  //      }
-  //    });
-  //}
+  changeUserActivation(row) {
+    this.confirmService.confirm({ message: 'Изменить статус врача?'})
+      .subscribe(res => {
+        if (res) {
+          this.loader.open();
+          this.crudService.chageDoctorActive(row.doctorId)
+            .subscribe(
+              data => {
+                this.items = data;
+                this.loader.close();
+                this.snack.open('Статус обновлён!', 'OK', { duration: 4000 })
+              },
+              error => {
+                this.loader.close();
+                this.snack.open(error.error.message, 'OK', { duration: 4000 })
+              }
+            );
+        }
+      })
+  }
 
   getUserRole(): string {
     return this.ls.getItem('EGRET_USER').role;

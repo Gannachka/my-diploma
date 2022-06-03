@@ -34,9 +34,9 @@ export class CrudService {
     return this.http.post('/api/questionary', item);
   }
 
-  //addAppointment(item): Observable<any> {
-  //  return this.http.post('/api/appointment', item);
-  //}
+  chageDoctorActive(item): Observable<any> {
+    return this.http.put('/api/doctorProfile?id=' + item, null);
+  }
 
   addPacient(item): Observable<any> {
     return this.http.post('/api/register', item);

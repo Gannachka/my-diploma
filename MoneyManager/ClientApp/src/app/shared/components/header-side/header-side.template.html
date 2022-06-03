@@ -28,16 +28,16 @@
   <mat-menu #accountMenu="matMenu">
     <button mat-menu-item [routerLink]="['/profile/overview']">
       <mat-icon>account_box</mat-icon>
-      <span>Profile</span>
+      <span>Профиль</span>
     </button>
     <button mat-menu-item [routerLink]="['/profile/settings']">
       <mat-icon>settings</mat-icon>
-      <span>Account Settings</span>
+      <span>Настройки профиля</span>
     </button>
    
     <button mat-menu-item (click)="jwtAuth.signout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span>{{ "SIGNOUT" | translate }}</span>
+      <span>Выход</span>
     </button>
   </mat-menu>
 </mat-toolbar>

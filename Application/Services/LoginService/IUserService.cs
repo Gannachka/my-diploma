@@ -19,8 +19,15 @@ namespace Application.Services.LoginService
 
         Task<int> GetPacientIdByUserId(int userId);
 
+        Task<int> GetUserIDByDoctorId(int doctorId);
+        Task ChangeUserActive(int id);
+
         Task<int> GetAdminIdByUserId(int userId);
 
         Task CompleteSetup(PasswordSetupModelDTO passwordSetupModel);
+
+        Task<DoctorRegistrationModelDTO> GetDoctorProfile(int doctorId);
+
+        Task<PacientDTO> GetPacientProfile(int pacientId);
     }
 }

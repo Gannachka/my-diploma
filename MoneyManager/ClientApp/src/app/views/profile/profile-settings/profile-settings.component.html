@@ -1,30 +1,27 @@
 <mat-card class="p-0">
   <mat-tab-group>
-    <mat-tab label="Account Settings">
+    <mat-tab label="Настройк профиля">
       <mat-card-content class="mt-16">
         <form *ngIf="getUserRole() === 'User'" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="fullName"
+                   [formControl]="settingsForm.controls['fullName']"
                    name="fullName"
-                   placeholder="Ф.И.О."
-                   value="">
+                   placeholder="Ф.И.О." />
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="email"
+                   [formControl]="settingsForm.controls['email']"
                    type="email"
                    name="email"
-                   placeholder="Электронная почта"
-                   value="">
+                   placeholder="Электронная почта">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="age"
+                   [formControl]="settingsForm.controls['age']"
                    type="number"
                    name="age"
-                   placeholder="Возраст"
-                   value="">
+                   placeholder="Возраст">
           </mat-form-field>
           <button mat-raised-button color="primary">Сохранить</button>
         </form>
@@ -32,34 +29,31 @@
         <form *ngIf="getUserRole() === 'Doctor'" [formGroup]="doctorSettingsForm" (ngSubmit)="onDoctorSubmit()">
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="fullName"
+                   [formControl]="doctorSettingsForm.controls['fullName']"
                    name="fullName"
-                   placeholder="Ф.И.О."
-                   value="">
+                   placeholder="Ф.И.О.">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="email"
+                   [formControl]="doctorSettingsForm.controls['email']"
                    type="email"
                    name="email"
-                   placeholder="Электронная почта"
-                   value="">
+                   placeholder="Электронная почта">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput
-                   formControlName="phoneNumber"
+                   [formControl]="doctorSettingsForm.controls['phoneNumber']"
                    type="text"
                    name="phoneNumber"
-                   placeholder="Номер телефона"
-                   value="">
+                   placeholder="Номер телефона">
           </mat-form-field>
           <mat-form-field class="full-width">
             <input matInput
+                   [formControl]="doctorSettingsForm.controls['workExperience']"
                    formControlName="workExperience"
                    type="number"
                    name="workExperience"
-                   placeholder="Опыт работы"
-                   value="">
+                   placeholder="Опыт работы">
           </mat-form-field>
           <button mat-raised-button color="primary">Сохранить</button>
         </form>

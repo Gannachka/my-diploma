@@ -35,6 +35,24 @@ namespace Application.Services.PacientService
             }
         }
 
+        public async Task<List<PacientDTO>> GetPacientsNew(int pacientId)
+        {
+            try
+            {
+                var pacient = await context.Pacients.FirstOrDefaultAsync(x => x.PatientId == pacientId);
+                var user = await context.Users
+                    .Include(x => x.Pacient)
+                    .Where(x => x.RoleId == 1 && x.PacientId.HasValue && x.Pacient.DoctorId == pacient.DoctorId)
+                    .ToListAsync();
+
+                return mapper.Map<List<User>, List<PacientDTO>>(user);
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public async Task DeletePacient(int id)
         {
             try

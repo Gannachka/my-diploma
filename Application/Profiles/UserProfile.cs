@@ -49,14 +49,16 @@
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
                .ForMember(res => res.Age, src => src.MapFrom(x => x.Pacient.Age))
                .ForMember(res => res.Diagnosis, src => src.MapFrom(x => x.Pacient.Diagnosis))
-               .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId));
+               .ForMember(res => res.UserId, src => src.MapFrom(x => x.UserId))
+               .ForMember(res => res.IsActive, src => src.MapFrom(x => x.IsActive));
 
             CreateMap<User, DoctorDTO>()
                .ForMember(res => res.FullName, src => src.MapFrom(x => x.Doctor.FullName))
                .ForMember(res => res.Email, src => src.MapFrom(x => x.Email))
                .ForMember(res => res.PhoneNumber, src => src.MapFrom(x => x.Doctor.PhoneNumber))
                .ForMember(res => res.WorkExperience, src => src.MapFrom(x => x.Doctor.WorkExperience))
-               .ForMember(res => res.DoctorId, src => src.MapFrom(x => x.UserId));
+               .ForMember(res => res.DoctorId, src => src.MapFrom(x => x.UserId))
+               .ForMember(res => res.IsActive, src => src.MapFrom(x => x.IsActive));
 
             CreateMap<User, DoctorDTO>()
                 .ForMember(res => res.FullName, src => src.MapFrom(x => x.Doctor.FullName))

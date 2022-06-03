@@ -7,6 +7,10 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { CrudPacientsService } from '../crud-pacients.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
 
 @Component({
   selector: 'app-pacients-appointment-table-popup',
@@ -51,7 +55,7 @@ export class PacientsAppointmentPopupComponent implements OnInit, OnDestroy {
           this.appointments = data;
         },
         error => {
-          this.snack.open('Some Problems with loading', 'OK', { duration: 4000 })
+          this.snack.open('Проблемы с загрузкой', 'OK', { duration: 4000 })
         });
   }
 

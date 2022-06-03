@@ -5,7 +5,7 @@
   "CHAT": "Чат",
   "CALENDAR": "Calendar",
   "DIALOGS": "Dialogs",
-  "CONFIRM": "Confirm",
+  "CONFIRM": "Подтвердить",
   "LOADER": "Loader",
 
   "MATERIAL": "Material",
@@ -48,9 +48,9 @@
 
   "PAGES": "Pages",
   "SESSIONS": "Sessions",
-  "SIGNIN": "Signin",
+  "SIGNIN": "Вход",
   "SIGNUP": "Signup",
-  "SIGNOUT": "Sign out",
+  "SIGNOUT": "Выход",
   "FORGOT": "Forgot",
   "LOCKSCREEN": "Lockscreen",
 
@@ -58,7 +58,7 @@
   "GALLERY": "Gallery",
   "PRICINGS": "Pricings",
   "USERS": "Users",
-  "PROFILE": "Profile",
+  "PROFILE": "Профиль",
   "BLANK": "Blank",
   "MATICONS": "Material Icons",
   "ADD": "Add",
@@ -68,7 +68,7 @@
   "NOTFOUND": "Not Found",
   "ERROR": "Error",
   "OVERVIEW": "Главная",
-  "SETTINGS": "Settings",
+  "SETTINGS": "Профиль",
 
   "ECOMMERCE": "Ecommerce",
   "SHOP": "Shop",

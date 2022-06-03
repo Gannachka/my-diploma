@@ -18,6 +18,9 @@ export class CrudPacientsService {
     return this.http.get('/api/pacientsAppoitment?userId=' + item);
   }
 
+  chagePacientActive(item): Observable<any> {
+    return this.http.put('/api/user?id=' + item, null);
+  }
 
   addPacient(item): Observable<any> {
     return this.http.post('/api/register', item);

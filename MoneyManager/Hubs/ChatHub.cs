@@ -27,12 +27,6 @@ namespace MoneyManager.Hubs
             return Clients.Client(connectionId).SendAsync("ReceiveDM", Context.ConnectionId, message);
         }
 
-        //public async Task DeleteMessage(MessageDeleteModelDTO message)
-        //{
-        //    var deletedMessage = await this.messageService.DeleteMessage(message);
-        //    await Clients.All.SendAsync("BroadCastDeleteMessage", Context.ConnectionId, deletedMessage);
-        //}
-
         public async Task PublishUserOnConnect(int id, string fullname)
         {
             var existingUser = Users.FirstOrDefault(x => x.UserId == id);

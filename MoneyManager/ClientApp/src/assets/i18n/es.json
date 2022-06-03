@@ -5,7 +5,7 @@
   "CHAT": "Charla",
   "CALENDAR": "Calendario",
   "DIALOGS": "Diálogo",
-  "CONFIRM": "Confirmar",
+  "CONFIRM": "Подтвердить",
   "LOADER": "Loader",
 
   "MEMBER": "Miembro",
@@ -18,7 +18,7 @@
   "CHECKBOX": "Checkbox",
   "DATEPICKER": "Datepicker",
   "RADIO": "Radio",
-  "TOOLBAR": "Toolbar",    
+  "TOOLBAR": "Toolbar",
   "LISTS": "lista",
   "GRIDS": "Grids",
   "PROGRESS": "Progreso",

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.DTOs.UserDTOs
+﻿namespace Application.DTOs.UserDTOs
 {
     public class PacientDTO
     {
@@ -17,5 +11,6 @@ namespace Application.DTOs.UserDTOs
         public string Email { get; set; }
 
         public int Age { get; set; }
+        public bool IsActive { get; set; }
     }
 }

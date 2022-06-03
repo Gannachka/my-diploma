@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,8 @@ import { ProfileOverviewComponent } from './profile-overview/profile-overview.co
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { ProfileBlankComponent } from './profile-blank/profile-blank.component';
 import { ProfileRoutes } from "./profile.routing";
+import { ProfileService } from './profile.service';
+import { InvoiceService } from '../invoice/invoice.service';
 
 @NgModule({
   imports: [
@@ -48,9 +50,10 @@ import { ProfileRoutes } from "./profile.routing";
     ChartsModule,
         FileUploadModule,
     SharedPipesModule,
-    ReactiveFormsModule,  
+    ReactiveFormsModule,
     RouterModule.forChild(ProfileRoutes)
   ],
-  declarations: [ProfileComponent, ProfileOverviewComponent, ProfileSettingsComponent, ProfileBlankComponent]
+  declarations: [ProfileComponent, ProfileOverviewComponent, ProfileSettingsComponent, ProfileBlankComponent],
+  providers: [ProfileService, InvoiceService, { provide: LOCALE_ID, useValue: "ru" }],
 })
 export class ProfileModule { }

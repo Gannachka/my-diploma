@@ -40,7 +40,7 @@
 
       <!-- Weight Column -->
       <ng-container matColumnDef="headache">
-        <mat-header-cell *matHeaderCellDef>at Головная боль </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Головная боль </mat-header-cell>
         <!--<mat-cell *matCellDef="let element"> {{element.headache}} </mat-cell>-->
         <mat-cell *matCellDef="let element">
           <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.headache">{{element?.headache ? 'Да' : 'Нет'}}</mat-chip>
@@ -48,7 +48,7 @@
       </ng-container>
 
       <ng-container matColumnDef="obstructedBreathing">
-        <mat-header-cell *matHeaderCellDef> Затруднённое дыхание]</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Затруднённое дыхание</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-chip mat-sm-chip [color]="'primary'" [selected]="element.obstructedBreathing">{{element?.obstructedBreathing ? 'Да' : 'Нет'}}</mat-chip>
         </mat-cell>
@@ -104,17 +104,17 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Головная боль" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.headache }}
+            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.headache">{{row?.headache ? 'Да' : 'Нет'}}</mat-chip>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Затруднённое дыхание" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.tiredness }}
+            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.obstructedBreathing">{{row?.obstructedBreathing ? 'Да' : 'Нет'}}</mat-chip>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Усталость" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.obstructedBreathing }}
+            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.tiredness">{{row?.tiredness ? 'Да' : 'Нет'}}</mat-chip>
           </ng-template>
         </ngx-datatable-column>
 
@@ -191,10 +191,15 @@
         <!--добавить disabled or enabled-->
         <ngx-datatable-column name="Статус" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-
+            <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.isActive">{{row.isActive ? 'Активирован' : 'Деактивирован'}}</mat-chip>
           </ng-template>
         </ngx-datatable-column>
-      </ngx-datatable>
+        <ngx-datatable-column name="Изменить статус" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button mat-icon-button mat-sm-button color="primary" (click)="changeUserActivation(row)">{{ row.isActive ? 'Деактивировать' : 'Активировать' }}</button>
+          </ng-template>
+        </ngx-datatable-column>
+       </ngx-datatable>
     </mat-card-content>
   </mat-card>
 

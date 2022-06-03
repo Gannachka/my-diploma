@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from '../../shared/animations/egret-animations';
 import { DisplayTransactionModel } from '../../shared/models/display.transaction.model';
+import { AppConfirmService } from '../../shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from '../../shared/services/app-loader/app-loader.service';
 import { NgxTablePopupComponent } from '../cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { PacientsTablePopupComponent } from '../cruds/crud-ngx-table/pacients-table-popup/pacients-table-popup.component';
@@ -20,6 +21,7 @@ export class CrudPacientsComponent implements OnInit, OnDestroy  {
   public getItemSub: Subscription;
   constructor(
     private crudService: CrudPacientsService,
+    private confirmService: AppConfirmService,
     private snack: MatSnackBar,
     private loader: AppLoaderService,
     private dialog: MatDialog,
@@ -115,6 +117,28 @@ export class CrudPacientsComponent implements OnInit, OnDestroy  {
         }
       });
   }
+
+  changeUserActivation(row) {
+    this.confirmService.confirm({ message: 'Изменить статус пациента?' })
+      .subscribe(res => {
+        if (res) {
+          this.loader.open();
+          this.crudService.chagePacientActive(row.userId)
+            .subscribe(
+              data => {
+                this.items = data;
+                this.loader.close();
+                this.snack.open('Статус обновлён!', 'OK', { duration: 4000 })
+              },
+              error => {
+                this.loader.close();
+                this.snack.open(error.error.message, 'OK', { duration: 4000 })
+              }
+            );
+        }
+      })
+  }
+
   //isNew?
   openAppoitmentPopUp(data: any = {},) {
     const title = 'Препараты пациента';

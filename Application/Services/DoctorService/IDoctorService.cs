@@ -13,6 +13,7 @@ namespace Application.Services.DoctorService
     {
         Task<List<DoctorDTO>> GetDoctors(int id);
         Task<List<Doctor>> GetDoctorProfile(int id);
+        Task<List<DoctorDTO>> GetDoctorsNew(int doctortId);
 
         Task RegisterDoctor(DoctorRegistrationModelDTO registrationModel, string verificationURL, int adminId);        
     }

@@ -60,6 +60,23 @@
             }
         }
 
+        public async Task<int> GetUserIDByDoctorId(int doctorId)
+        {
+            try
+            {
+                var userId = await context.Users
+                    .Where(x => x.DoctorId == doctorId)
+                    .Select(x => x.UserId)
+                    .FirstOrDefaultAsync();
+
+                return userId;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<int> GetPacientIdByUserId(int userId)
         {
             try
@@ -103,11 +120,11 @@
                     .Include(x => x.Doctor)
                     .Include(x => x.Pacient)
                     .Include(x => x.Admin)
-                    .SingleOrDefaultAsync(x => x.Email == email && x.Password == password));
+                    .SingleOrDefaultAsync(x => x.Email == email && x.Password == password && x.IsActive));
 
                 if (user != null && user.Role != "Admin" && user.Role != "Doctor")
                 {
-                    await EmailService.SendEmailAsync(email, "НАПОМИНАНИЕ", "ДЕД, ПРИМИ ТАБЛЕТКИ!");
+                    await EmailService.SendEmailAsync(email, "НАПОМИНАНИЕ", "Не забудьте принять лекарство!");
                 }
 
                 return user;
@@ -181,6 +198,87 @@
                 }
 
                 await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task ChangeUserActive(int id)
+        {
+            try
+            {
+                var user = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
+                user.IsActive = !user.IsActive;
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task ChangeDoctorActive(int id)
+        {
+            try
+            {
+                var user = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
+                user.IsActive = !user.IsActive;
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<DoctorRegistrationModelDTO> GetDoctorProfile(int doctorId)
+        {
+            try
+            {
+                var user = await context.Doctors
+                    .Include(x => x.User)
+                    .Where(x => x.DoctorId == doctorId)
+                    .Select(x => new DoctorRegistrationModelDTO
+                    {
+                        FullName = x.FullName,
+                        Email = x.User.Email,
+                        WorkExperience = x.WorkExperience,
+                        PhoneNumber = x.PhoneNumber
+                    })
+                    .FirstOrDefaultAsync();
+
+                return user;
+            }
+            catch ( Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<PacientDTO> GetPacientProfile(int pacientId)
+        {
+
+            try
+            {
+                var user = await context.Pacients
+                    .Include(x => x.User)
+                    .Where(x => x.PatientId == pacientId)
+                    .Select(x => new PacientDTO
+                    {
+                        FullName = x.FullName,
+                        Email = x.User.Email,
+                        Age = x.Age
+                       
+                    })
+                    .FirstOrDefaultAsync();
+
+                return user;
             }
             catch (Exception ex)
             {

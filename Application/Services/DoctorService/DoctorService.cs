@@ -36,6 +36,25 @@
             }
         }
 
+        public async Task<List<DoctorDTO>> GetDoctorsNew(int doctortId)
+        {
+            try
+            {
+                var doctor = await context.Doctors.FirstOrDefaultAsync(x => x.DoctorId == doctortId);
+                var user = await context.Users
+                    .Include(x => x.Doctor)
+                    .Where(x => x.RoleId == 3 && x.DoctorId.HasValue && x.Doctor.AdminId == doctor.AdminId)
+                    .ToListAsync();
+
+                return mapper.Map<List<User>, List<DoctorDTO>>(user);
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<Doctor>> GetDoctorProfile(int id)
         {
             return await context.Doctors.Where(x => x.DoctorId == id).ToListAsync();

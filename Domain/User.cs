@@ -1,6 +1,7 @@
 ﻿namespace Domain
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,6 +44,10 @@
         public int? AdminId { get; set; }
 
         public Admin Admin { get; set; }
+
+        [Required]
+        [DefaultValue(true)]
+        public bool IsActive{ get; set; }
 
         public virtual List<Message> Messages { get; set; } = new List<Message>();
     }

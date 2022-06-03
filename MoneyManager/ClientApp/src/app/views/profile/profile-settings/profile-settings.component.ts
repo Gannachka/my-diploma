@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { LocalStoreService } from '../../../shared/services/local-store.service';
+import { ProfileService } from '../profile.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -15,29 +16,29 @@ export class ProfileSettingsComponent implements OnInit {
   settingsForm: FormGroup;
   doctorSettingsForm: FormGroup;
   errorMsg = '';
+  profile;
   public uploader: FileUploader = new FileUploader({ url: 'upload_url' });
   public hasBaseDropZoneOver: boolean = false;
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private snack: MatSnackBar,
     private router: Router,
-    private ls: LocalStoreService  ) { }
+    private ls: LocalStoreService,
+    private profileService: ProfileService,  ) { }
 
   ngOnInit() {
-    this.settingsForm = this.fb.group(
-      {
-        fullName: ["", Validators.required],
-        age: ["", Validators.required],
-        email: ["", [Validators.required, Validators.email]],
-      });
+    this.profileService.getDoctorProfile()
+      .subscribe(
+        data => {
+          this.profile = data;
+          this.buildItemForms();
+        },
+        error => {
+          this.buildItemForms();
+        }
+    );
 
-    this.doctorSettingsForm = this.fb.group(
-      {
-        fullName: ["", Validators.required],
-        workExperience: ["", Validators.required],
-        email: ["", [Validators.required, Validators.email]],
-        phoneNumber: ["", [Validators.required]]
-      });
+    this.buildItemForms();
   }
   onSubmit() {
     if (!this.settingsForm.invalid) {
@@ -76,5 +77,22 @@ export class ProfileSettingsComponent implements OnInit {
 
   getUserRole(): string {
     return this.ls.getItem('EGRET_USER').role;
+  }
+
+  buildItemForms() {
+    this.settingsForm = this.fb.group(
+      {
+        fullName: [this.profile.fullName || "", Validators.required],
+        age: [this.profile.age || "", Validators.required],
+        email: [this.profile.email || "", [Validators.required, Validators.email]],
+      });
+
+    this.doctorSettingsForm = this.fb.group(
+      {
+        fullName: [this.profile.fullName || "", Validators.required],
+        workExperience: [this.profile.workExperience || "", Validators.required],
+        email: [this.profile.email || "", [Validators.required, Validators.email]],
+        phoneNumber: [this.profile.phoneNumber || "", [Validators.required]]
+      });
   }
 }
